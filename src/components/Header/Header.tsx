@@ -1,5 +1,5 @@
 import React from "react";
-import samuraiSvg from "../assets/img/samurai.svg";
+import samuraiSvg from "../../assets/img/samurai.svg";
 import './Header.css';
 
 export const Header = () => {

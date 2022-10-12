@@ -1,6 +1,7 @@
 import React from "react";
-import mainJpg from "../assets/img/main.jpg";
+import mainJpg from "../../assets/img/main.jpg";
 import './Profile.css';
+import {MyPosts} from "./MyPosts/MyPosts";
 
 export const Profile = () => {
     return (
@@ -11,9 +12,7 @@ export const Profile = () => {
             <div>
                 My profile
             </div>
-            <div>My posts:</div>
-            <div>Post1</div>
-            <div>Post2</div>
+            <MyPosts/>
         </div>
     )
 }
