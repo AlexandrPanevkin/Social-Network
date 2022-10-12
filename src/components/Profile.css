@@ -1,0 +1,11 @@
+.profile {
+    grid-area: c;
+    background-color: #f1ff99;
+}
+
+.profile-icon {
+    width: 99.4%;
+    height: 130px;
+    border: 3px solid black;
+
+}
