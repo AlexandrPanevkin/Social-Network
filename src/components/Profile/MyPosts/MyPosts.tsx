@@ -8,9 +8,9 @@ export const MyPosts = () => {
             <div>My posts:</div>
             <textarea></textarea>
             <button>Add post</button>
-            <Post/>
-            <Post/>
-            <Post/>
+            <Post message={"post1"} likesCount={1}/>
+            <Post message={"post2"} likesCount={7}/>
+            <Post message={"post3"} likesCount={4}/>
         </div>
     )
 }
