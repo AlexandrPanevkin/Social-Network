@@ -1,6 +1,7 @@
-.nav {
+.navbar {
     grid-area: n;
     background-color: #406d73;
+    padding-top: 15px;
 }
 
 a {
@@ -10,8 +11,13 @@ a {
     color: white;
     cursor: pointer;
     transition: opacity 0.15s ease-in-out;
+    text-decoration: none
 }
 
 a:hover {
     opacity: 0.5;
+}
+
+a.active {
+    color: gold
 }

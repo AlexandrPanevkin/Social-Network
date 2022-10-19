@@ -51,5 +51,9 @@
 
 }
 
+.app-wrapper-content {
+    grid-area: c;
+    background-color: #f1ff99;
+}
 
 
