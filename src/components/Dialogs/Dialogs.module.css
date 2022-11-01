@@ -5,23 +5,28 @@
     height: 100%;
     grid-gap: 15px;
 }
-.dialogs-items {
+.dialogsItems {
     grid-area: d;
     background-color: #A9A9A9;
     padding: 15px 0px 0px 25px;
 
 }
-.dialogs-items a {
+.dialogsItems div {
     text-decoration: none;
     color: black;
     cursor: pointer;
     transition: opacity 0.15s ease-in-out;
+
 }
 
-.dialogs-items a:hover {
+.dialogsItems div:hover {
     color: white;
 }
 
-.dialogs-items a.active {
+.dialogsItems div.active {
     color: red;
+}
+
+.message {
+
 }

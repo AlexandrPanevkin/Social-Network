@@ -1,5 +1,5 @@
 import React from "react";
-import './Post.css';
+import s from './Post.module.css';
 import postUserSvg from "../../../../assets/img/postUser.png";
 
 type PostPropsType = {
@@ -9,8 +9,8 @@ type PostPropsType = {
 
 export const Post = (props: PostPropsType) => {
     return (
-        <div className="Post">
-            <img className="postUser-icon" src={postUserSvg} alt="Post User"/>
+        <div className={s.post}>
+            <img className={s.postUserIcon} src={postUserSvg} alt="Post User"/>
             {props.message}
             <div>Count of likes: {props.likesCount}</div>
         </div>
