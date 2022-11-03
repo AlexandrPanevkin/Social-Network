@@ -16,6 +16,6 @@
     opacity: 0.5;
 }
 
-.navbarNav a.active {
+.navbarNav:active {
     color: gold
 }

@@ -1,9 +1,10 @@
 import React from "react";
 import mainJpg from "../../assets/img/main.jpg";
 import s from './Profile.module.css';
-import {MyPosts} from "./MyPosts/MyPosts";
+import {MyPosts, postPropsType} from "./MyPosts/MyPosts";
 
-export const Profile = () => {
+export const Profile = (props:postPropsType) => {
+
     return (
         <div className={s.profile}>
             <div>
@@ -12,7 +13,7 @@ export const Profile = () => {
             <div>
                 My profile
             </div>
-            <MyPosts/>
+            <MyPosts posts={props.posts}/>
         </div>
     )
 }

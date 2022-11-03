@@ -8,15 +8,17 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
+import {postPropsType} from "./components/Profile/MyPosts/MyPosts";
 
-const App = () => {
+const App = (props:postPropsType) => {
+
     return (
         <BrowserRouter>
             <div className={s.appWrapper}>
                 <Header/>
                 <Navbar/>
                 <div className={s.appWrapperContent}>
-                    <Route path='/profile' component={Profile}/>
+                    <Route path='/profile' render={()=><Profile posts={props.posts}/>}/>
                     <Route path='/dialogs' component={Dialogs}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
