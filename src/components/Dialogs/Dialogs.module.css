@@ -5,13 +5,15 @@
     height: 100%;
     grid-gap: 15px;
 }
+
 .dialogsItems {
     grid-area: d;
     background-color: #A9A9A9;
     padding: 15px 0px 0px 25px;
 
 }
-.dialogsItems div {
+
+.dialogsItems a {
     text-decoration: none;
     color: black;
     cursor: pointer;
@@ -23,10 +25,45 @@
     color: white;
 }
 
-.dialogsItems div.active {
+.dialogsItems a.active {
     color: red;
 }
 
-.message {
+.messageImg {
+    width: 50px;
+    height: 50px;
+}
 
+.dialog {
+
+}
+
+.message {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px;
+    border-color: #F5F7FB;
+    border-radius: 10px 10px 10px 0px;
+    background: #0066CC;
+    margin-left: 10px;
+    color: white
+}
+
+.message:after {
+    content: "";
+    position: relative;
+    bottom: 0;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(45px at top left, transparent 50%, #0066CC 0);
+    margin-left: -30px;
+    margin-bottom: -10px;
+}
+.imageAndText {
+    align-items: flex-end;
+    display: flex;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    cursor: pointer;
 }

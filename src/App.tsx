@@ -8,9 +8,13 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {postPropsType} from "./components/Profile/MyPosts/MyPosts";
+import {stateType} from "./Redux/Redux";
 
-const App = (props:postPropsType) => {
+type statePropsType = {
+    state: stateType
+}
+
+const App = (props:statePropsType) => {
 
     return (
         <BrowserRouter>
@@ -18,8 +22,8 @@ const App = (props:postPropsType) => {
                 <Header/>
                 <Navbar/>
                 <div className={s.appWrapperContent}>
-                    <Route path='/profile' render={()=><Profile posts={props.posts}/>}/>
-                    <Route path='/dialogs' component={Dialogs}/>
+                    <Route path='/profile' render={()=><Profile posts={props.state.ProfilePage.posts}/>}/>
+                    <Route path='/dialogs' component={()=><Dialogs dialogs={props.state.DialogsPage.dialogs} messages={props.state.DialogsPage.messages}/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>

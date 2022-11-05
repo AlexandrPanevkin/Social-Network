@@ -1,7 +1,12 @@
 import React from "react";
 import mainJpg from "../../assets/img/main.jpg";
 import s from './Profile.module.css';
-import {MyPosts, postPropsType} from "./MyPosts/MyPosts";
+import {MyPosts} from "./MyPosts/MyPosts";
+import {postsType} from "../../Redux/Redux";
+
+export type postPropsType = {
+    posts: postsType[]
+}
 
 export const Profile = (props:postPropsType) => {
 
