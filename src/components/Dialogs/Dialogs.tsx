@@ -15,8 +15,16 @@ export const Dialogs = (props: DialogsPropsType) => {
 
     let dialogsElements = props.dialogs.map(dialog => <DialogItem id={dialog.id} name={dialog.name}/>)
 
-    let messagesElements = props.messages.map(message => <div className={s.imageAndText}><img className={s.messageImg} src={postUserSvg}/><span className={s.message}> <Message
+    let messagesElements = props.messages.map(message => <div className={s.imageAndText}><img className={s.messageImg}
+                                                                                              src={postUserSvg}/><span
+        className={s.message}> <Message
         id={message.id} message={message.message}/></span></div>)
+
+    const sendMessageRef = React.createRef<HTMLTextAreaElement>()
+
+    const onSendMessageClickHandler = () => {
+        alert(sendMessageRef.current?.value)
+    }
 
     return (
         <div className={s.dialogs}>
@@ -24,8 +32,13 @@ export const Dialogs = (props: DialogsPropsType) => {
                 {dialogsElements}
             </div>
             <div>
-                {messagesElements}
+                <div>{messagesElements}</div>
+                <div ><textarea className={s.textarea} ref={sendMessageRef}></textarea></div>
+                <div >
+                    <button className={s.button} onClick={onSendMessageClickHandler}>Send message</button>
+                </div>
             </div>
+
         </div>
     )
 }
