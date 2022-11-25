@@ -10,16 +10,23 @@ export const MyPosts = (props: postPropsType) => {
     const newPostElementRef = React.createRef<HTMLTextAreaElement>();
 
     const onAddPostClickHandler = () => {
-         if (newPostElementRef.current) {
+        if (newPostElementRef.current) {
             props.addPost(newPostElementRef.current.value)
-             newPostElementRef.current.value = ''
+        props.updateNewPostText('')
         }
+    }
+
+    const onPostChangeHandler = () => {
+        let newText = newPostElementRef.current?.value;
+        props.updateNewPostText(newText)
+
     }
 
     return (
         <div className={s.myPosts}>
             <div>My posts:</div>
-            <div><textarea className={s.textarea} ref={newPostElementRef}></textarea></div>
+            <div><textarea value={props.newPostText} className={s.textarea} onChange={onPostChangeHandler}
+                           ref={newPostElementRef}/></div>
             <div>
                 <button className={s.button} onClick={onAddPostClickHandler}>Add post</button>
             </div>

@@ -7,6 +7,8 @@ import {postsType} from "../../Redux/Redux";
 export type postPropsType = {
     posts: postsType[]
     addPost:(postMessage: string)=>void
+    newPostText: string
+    updateNewPostText:(newText: any)=>void
 }
 
 export const Profile = (props:postPropsType) => {
@@ -19,7 +21,7 @@ export const Profile = (props:postPropsType) => {
             <div>
                 My profile
             </div>
-            <MyPosts posts={props.posts} addPost={props.addPost}/>
+            <MyPosts updateNewPostText={props.updateNewPostText}  newPostText={props.newPostText} posts={props.posts} addPost={props.addPost}/>
         </div>
     )
 }
