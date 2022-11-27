@@ -8,7 +8,7 @@ export type postPropsType = {
     posts: postsType[]
     addPost:(postMessage: string)=>void
     newPostText: string
-    updateNewPostText:(newText: any)=>void
+    updateNewPostText:(newText: string)=>void
 }
 
 export const Profile = (props:postPropsType) => {

@@ -8,12 +8,12 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {stateType, updateNewPostText} from "./Redux/Redux";
+import {stateType} from "./Redux/Redux";
 
 type statePropsType = {
     state: stateType
     addPost:(postMessage: string)=>void
-    updateNewPostText:(newText: any)=>void
+    updateNewPostText:(newText: string)=>void
 }
 
 const App = (props:statePropsType) => {

@@ -59,16 +59,17 @@ export const state: stateType = {
 }
 
 export const addPost = (postMessage: string) => {
-    const newPost: postsType = {
-        id: 4,
+    const newPost = {
+        id: 1,
         message: postMessage,
-        likesCount: 0
+        likesCount: 7
     }
     state.ProfilePage.posts.push(newPost)
+    state.ProfilePage.newPostText = ''
     rerenderEntireTree(state)
 }
 
-export const updateNewPostText = (newText: any) => {
+export const updateNewPostText = (newText: string) => {
     state.ProfilePage.newPostText = newText
     rerenderEntireTree(state)
 }
