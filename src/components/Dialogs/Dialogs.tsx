@@ -2,7 +2,7 @@ import React from "react";
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogsType, MessagesType} from "../../Redux/Redux";
+import {DialogsType, MessagesType} from "../../Redux/State";
 import postUserSvg from "../../assets/img/postUser.png";
 
 export type DialogsPropsType = {

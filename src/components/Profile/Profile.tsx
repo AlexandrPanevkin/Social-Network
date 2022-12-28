@@ -2,7 +2,7 @@ import React from "react";
 import mainJpg from "../../assets/img/main.jpg";
 import s from './Profile.module.css';
 import {MyPosts} from "./MyPosts/MyPosts";
-import {postsType} from "../../Redux/Redux";
+import {postsType} from "../../Redux/State";
 
 export type postPropsType = {
     posts: postsType[]
