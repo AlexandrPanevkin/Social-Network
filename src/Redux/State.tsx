@@ -1,4 +1,3 @@
-
 export type postsType = {
     id: number
     message: string
@@ -30,7 +29,17 @@ export type stateType = {
     DialogsPage: DialogsPageType
 }
 
-export const store = {
+export type StoreType = {
+    _state: stateType
+    updateNewPostText: (newText: string) => void
+    rerenderEntireTree: () => void
+    addPost: (postMessage: string) => void
+    subscribe: (callback: () => void) => void
+    getState: () => stateType
+    // dispatch: (action: any) => void
+}
+
+export const store: StoreType = {
     _state: {
         ProfilePage: {
             posts: [
@@ -56,10 +65,11 @@ export const store = {
 
 
     },
-    getState() {
-        return this._state
-    },
     rerenderEntireTree() {
+    },
+    updateNewPostText(newText: string) {
+        this._state.ProfilePage.newPostText = newText
+        this.rerenderEntireTree()
     },
     addPost(postMessage: string) {
         const newPost = {
@@ -71,13 +81,24 @@ export const store = {
         this._state.ProfilePage.newPostText = ''
         this.rerenderEntireTree()
     },
-    updateNewPostText(newText: string) {
-        this._state.ProfilePage.newPostText = newText
-        this.rerenderEntireTree()
+    subscribe(callback) {
+        this.rerenderEntireTree = callback;
     },
-    subscribe(callback: () => void) {
-        this.rerenderEntireTree= callback;
-    }
+    getState() {
+        return this._state
+    },
+    // dispatch(action) {
+    //     if (action.type === 'ADD-POST') {
+    //         const newPost = {
+    //             id: 1,
+    //             message: action.postMessage,
+    //             likesCount: 7
+    //         }
+    //         this._state.ProfilePage.posts.push(newPost)
+    //         this._state.ProfilePage.newPostText = ''
+    //         this.rerenderEntireTree()
+    //     }
+    // }
 }
 
 
