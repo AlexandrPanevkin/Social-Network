@@ -2,13 +2,12 @@ import React from "react";
 import mainJpg from "../../assets/img/main.jpg";
 import s from './Profile.module.css';
 import {MyPosts} from "./MyPosts/MyPosts";
-import {postsType} from "../../Redux/State";
+import {dispatchActionType, postsType} from "../../Redux/State";
 
 export type postPropsType = {
     posts: postsType[]
-    addPost:(postMessage: string)=>void
     newPostText: string
-    updateNewPostText:(newText: string)=>void
+    dispatch:(action: dispatchActionType)=>void
 }
 
 export const Profile = (props:postPropsType) => {
@@ -21,7 +20,7 @@ export const Profile = (props:postPropsType) => {
             <div>
                 My profile
             </div>
-            <MyPosts updateNewPostText={props.updateNewPostText}  newPostText={props.newPostText} posts={props.posts} addPost={props.addPost}/>
+            <MyPosts dispatch={props.dispatch} newPostText={props.newPostText} posts={props.posts}/>
         </div>
     )
 }
