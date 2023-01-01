@@ -1,5 +1,3 @@
-import {ChangeEvent} from "react";
-
 export type postsType = {
     id: number
     message: string
@@ -24,6 +22,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
+    newMessageText: string
 }
 
 export type stateType = {
@@ -60,7 +59,8 @@ export const store: StoreType = {
                 {id: 1, message: 'Hi, have a good day!!'},
                 {id: 2, message: 'Go to the DREAM'},
                 {id: 3, message: 'Good luck'},
-            ]
+            ],
+            newMessageText: ''
         },
 
 
@@ -77,36 +77,77 @@ export const store: StoreType = {
         if (action.type === 'ADD-POST') {
             const newPost = {
                 id: 1,
-                message: action.postMessage,
+                message: action.payload.postMessage,
                 likesCount: 7
             }
             this._state.ProfilePage.posts.unshift(newPost)
             this._state.ProfilePage.newPostText = ''
             this.rerenderEntireTree()
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.ProfilePage.newPostText = action.newText
+            this._state.ProfilePage.newPostText = action.payload.newText
+            this.rerenderEntireTree()
+        } else if (action.type === 'SEND-NEW-MESSAGE-TEXT') {
+            const newMessage = {
+                id: 1,
+                message: action.payload.newMessageText
+            }
+            this._state.DialogsPage.messages.push(newMessage)
+            this._state.DialogsPage.newMessageText = ''
+            this.rerenderEntireTree()
+        } else if(action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+            this._state.DialogsPage.newMessageText = action.payload.message
             this.rerenderEntireTree()
         }
     }
 }
 
-export type dispatchActionType = addPostActionType | updateNewPostActionType
+export type dispatchActionType =
+    addPostActionType
+    | updateNewPostActionType
+    | sendNewMessageTextACType
+    | updateNewMessageTextACType
 
 type addPostActionType = ReturnType<typeof addPostAC>
 
 type updateNewPostActionType = ReturnType<typeof updateNewPostTextAC>
 
+type sendNewMessageTextACType = ReturnType<typeof sendNewMessageTextAC>
+
+type updateNewMessageTextACType = ReturnType<typeof updateNewMessageTextAC>
+
 export const addPostAC = (newPostText: string) => {
     return {
         type: 'ADD-POST',
-        postMessage: newPostText
+        payload: {
+            postMessage: newPostText
+        }
     } as const
 }
 
-export const updateNewPostTextAC = (newText: string)=> {
+export const updateNewPostTextAC = (newText: string) => {
     return {
         type: 'UPDATE-NEW-POST-TEXT',
-        newText
+        payload: {
+            newText
+        }
+    } as const
+}
+
+export const sendNewMessageTextAC = (newMessageText: string) => {
+    return {
+        type: 'SEND-NEW-MESSAGE-TEXT',
+        payload: {
+            newMessageText
+        }
+    } as const
+}
+
+export const updateNewMessageTextAC = (messageText: string) => {
+    return {
+        type: 'UPDATE-NEW-MESSAGE-TEXT',
+        payload: {
+            message: messageText
+        }
     } as const
 }
 

@@ -24,7 +24,7 @@ const App = (props:statePropsType) => {
                 <Navbar/>
                 <div className={s.appWrapperContent}>
                     <Route path='/profile' render={()=><Profile newPostText={props.state.ProfilePage.newPostText} posts={props.state.ProfilePage.posts}  dispatch={props.dispatch}  />}/>
-                    <Route path='/dialogs' component={()=><Dialogs dialogs={props.state.DialogsPage.dialogs} messages={props.state.DialogsPage.messages}/>}/>
+                    <Route path='/dialogs' render={()=><Dialogs dialogs={props.state.DialogsPage.dialogs} messages={props.state.DialogsPage.messages} newMessageText={props.state.DialogsPage.newMessageText} dispatch={props.dispatch}/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>

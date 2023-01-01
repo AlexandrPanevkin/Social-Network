@@ -1,13 +1,21 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogsType, MessagesType} from "../../Redux/State";
+import {
+    DialogsType,
+    dispatchActionType,
+    MessagesType,
+    sendNewMessageTextAC,
+    updateNewMessageTextAC
+} from "../../Redux/State";
 import postUserSvg from "../../assets/img/postUser.png";
 
 export type DialogsPropsType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
+    newMessageText: string
+    dispatch:(action: dispatchActionType)=>void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -20,10 +28,12 @@ export const Dialogs = (props: DialogsPropsType) => {
         className={s.message}> <Message
         id={message.id} message={message.message}/></span></div>)
 
-    const sendMessageRef = React.createRef<HTMLTextAreaElement>()
-
     const onSendMessageClickHandler = () => {
-        alert(sendMessageRef.current?.value)
+      props.dispatch(sendNewMessageTextAC(props.newMessageText))
+    }
+
+    const onMessageChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch(updateNewMessageTextAC(event.currentTarget.value))
     }
 
     return (
@@ -33,8 +43,8 @@ export const Dialogs = (props: DialogsPropsType) => {
             </div>
             <div>
                 <div>{messagesElements}</div>
-                <div ><textarea className={s.textarea} ref={sendMessageRef}></textarea></div>
-                <div >
+                <div><textarea value={props.newMessageText} onChange={onMessageChangeHandler} className={s.textarea} /></div>
+                <div>
                     <button className={s.button} onClick={onSendMessageClickHandler}>Send message</button>
                 </div>
             </div>
