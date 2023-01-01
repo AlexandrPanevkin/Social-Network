@@ -1,3 +1,5 @@
+import {ChangeEvent} from "react";
+
 export type postsType = {
     id: number
     message: string
@@ -35,18 +37,6 @@ export type StoreType = {
     subscribe: (callback: () => void) => void
     getState: () => stateType
     dispatch: (action: dispatchActionType) => void
-}
-
-export type dispatchActionType = addPostActionType | updateNewPostActionType
-
-type addPostActionType = {
-    type: 'ADD-POST'
-    postMessage: string
-}
-
-type updateNewPostActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
 }
 
 export const store: StoreType = {
@@ -90,7 +80,7 @@ export const store: StoreType = {
                 message: action.postMessage,
                 likesCount: 7
             }
-            this._state.ProfilePage.posts.push(newPost)
+            this._state.ProfilePage.posts.unshift(newPost)
             this._state.ProfilePage.newPostText = ''
             this.rerenderEntireTree()
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
@@ -98,6 +88,26 @@ export const store: StoreType = {
             this.rerenderEntireTree()
         }
     }
+}
+
+export type dispatchActionType = addPostActionType | updateNewPostActionType
+
+type addPostActionType = ReturnType<typeof addPostAC>
+
+type updateNewPostActionType = ReturnType<typeof updateNewPostTextAC>
+
+export const addPostAC = (newPostText: string) => {
+    return {
+        type: 'ADD-POST',
+        postMessage: newPostText
+    } as const
+}
+
+export const updateNewPostTextAC = (newText: string)=> {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        newText
+    } as const
 }
 
 
