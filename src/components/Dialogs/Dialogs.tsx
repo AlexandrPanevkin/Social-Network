@@ -6,10 +6,9 @@ import {
     DialogsType,
     dispatchActionType,
     MessagesType,
-    sendNewMessageTextAC,
-    updateNewMessageTextAC
 } from "../../Redux/State";
 import postUserSvg from "../../assets/img/postUser.png";
+import { sendNewMessageTextAC, updateNewMessageTextAC } from "../../Redux/dialogsReducer";
 
 export type DialogsPropsType = {
     dialogs: DialogsType[]

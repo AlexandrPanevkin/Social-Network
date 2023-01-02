@@ -1,3 +1,6 @@
+import {addPostAC, profileReducer, updateNewPostTextAC} from "./profileReducer";
+import {dialogsReducer, sendNewMessageTextAC, updateNewMessageTextAC} from "./dialogsReducer";
+
 export type postsType = {
     id: number
     message: string
@@ -38,6 +41,16 @@ export type StoreType = {
     dispatch: (action: dispatchActionType) => void
 }
 
+export type dispatchActionType = addPostActionType | updateNewPostActionType | sendNewMessageTextACType | updateNewMessageTextACType
+
+type addPostActionType = ReturnType<typeof addPostAC>
+
+type updateNewPostActionType = ReturnType<typeof updateNewPostTextAC>
+
+type sendNewMessageTextACType = ReturnType<typeof sendNewMessageTextAC>
+
+type updateNewMessageTextACType = ReturnType<typeof updateNewMessageTextAC>
+
 export const store: StoreType = {
     _state: {
         ProfilePage: {
@@ -62,8 +75,6 @@ export const store: StoreType = {
             ],
             newMessageText: ''
         },
-
-
     },
     rerenderEntireTree() {
     },
@@ -74,82 +85,8 @@ export const store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            const newPost = {
-                id: 1,
-                message: action.payload.postMessage,
-                likesCount: 7
-            }
-            this._state.ProfilePage.posts.unshift(newPost)
-            this._state.ProfilePage.newPostText = ''
-            this.rerenderEntireTree()
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.ProfilePage.newPostText = action.payload.newText
-            this.rerenderEntireTree()
-        } else if (action.type === 'SEND-NEW-MESSAGE-TEXT') {
-            const newMessage = {
-                id: 1,
-                message: action.payload.newMessageText
-            }
-            this._state.DialogsPage.messages.push(newMessage)
-            this._state.DialogsPage.newMessageText = ''
-            this.rerenderEntireTree()
-        } else if(action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-            this._state.DialogsPage.newMessageText = action.payload.message
-            this.rerenderEntireTree()
-        }
+        profileReducer(this._state.ProfilePage, action)
+        dialogsReducer(this._state.DialogsPage, action)
+        this.rerenderEntireTree()
     }
 }
-
-export type dispatchActionType =
-    addPostActionType
-    | updateNewPostActionType
-    | sendNewMessageTextACType
-    | updateNewMessageTextACType
-
-type addPostActionType = ReturnType<typeof addPostAC>
-
-type updateNewPostActionType = ReturnType<typeof updateNewPostTextAC>
-
-type sendNewMessageTextACType = ReturnType<typeof sendNewMessageTextAC>
-
-type updateNewMessageTextACType = ReturnType<typeof updateNewMessageTextAC>
-
-export const addPostAC = (newPostText: string) => {
-    return {
-        type: 'ADD-POST',
-        payload: {
-            postMessage: newPostText
-        }
-    } as const
-}
-
-export const updateNewPostTextAC = (newText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        payload: {
-            newText
-        }
-    } as const
-}
-
-export const sendNewMessageTextAC = (newMessageText: string) => {
-    return {
-        type: 'SEND-NEW-MESSAGE-TEXT',
-        payload: {
-            newMessageText
-        }
-    } as const
-}
-
-export const updateNewMessageTextAC = (messageText: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-TEXT',
-        payload: {
-            message: messageText
-        }
-    } as const
-}
-
-
-
