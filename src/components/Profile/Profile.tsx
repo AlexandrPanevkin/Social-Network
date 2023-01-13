@@ -2,16 +2,16 @@ import React from "react";
 import mainJpg from "../../assets/img/main.jpg";
 import s from './Profile.module.css';
 import {MyPosts} from "./MyPosts/MyPosts";
-import {dispatchActionType, postsType} from "../../Redux/State";
+import {dispatchActionType, postsType, ProfilePageType} from "../../Redux/Store";
 
 export type postPropsType = {
-    posts: postsType[]
-    newPostText: string
+    // posts: postsType[]
+    // newPostText: string
     dispatch:(action: dispatchActionType)=>void
+    profilePage:ProfilePageType
 }
 
 export const Profile = (props:postPropsType) => {
-
     return (
         <div className={s.profile}>
             <div>
@@ -20,7 +20,7 @@ export const Profile = (props:postPropsType) => {
             <div>
                 My profile
             </div>
-            <MyPosts dispatch={props.dispatch} newPostText={props.newPostText} posts={props.posts}/>
+            <MyPosts dispatch={props.dispatch} newPostText={props.profilePage.newPostText} posts={props.profilePage.posts}/>
         </div>
     )
 }

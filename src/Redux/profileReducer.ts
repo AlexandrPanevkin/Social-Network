@@ -1,11 +1,24 @@
-import {dispatchActionType, ProfilePageType} from "./State";
+import {dispatchActionType, postsType, ProfilePageType} from "./Store";
 
-export const profileReducer = (state: ProfilePageType, action: dispatchActionType) => {
+type initialStateType = {
+    posts: postsType[],
+    newPostText:string
+}
+const initialState: initialStateType = {
+    posts: [
+        {id: 1, message: 'post1', likesCount: 7},
+        {id: 2, message: 'post2', likesCount: 2},
+        {id: 3, message: 'post3', likesCount: 4},
+    ],
+    newPostText: ''
+}
+
+export const profileReducer = (state: initialStateType =initialState, action: dispatchActionType): initialStateType => {
     switch (action.type) {
         case "ADD-POST": {
             const newPost = {
                 id: 1,
-                message: action.payload.postMessage,
+                message: state.newPostText,
                 likesCount: 7
             }
             state.posts.unshift(newPost)
@@ -13,7 +26,8 @@ export const profileReducer = (state: ProfilePageType, action: dispatchActionTyp
             return state
         }
         case "UPDATE-NEW-POST-TEXT": {
-            return state.newPostText = action.payload.newText
+            state.newPostText = action.payload.newText
+            return state
         }
         default: {
             return state

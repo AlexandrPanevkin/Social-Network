@@ -8,7 +8,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {dispatchActionType, stateType} from "./Redux/State";
+import {dispatchActionType, stateType} from "./Redux/Store";
 
 type statePropsType = {
     state: stateType
@@ -16,14 +16,13 @@ type statePropsType = {
 }
 
 const App = (props:statePropsType) => {
-
     return (
         <BrowserRouter>
             <div className={s.appWrapper}>
                 <Header/>
                 <Navbar/>
                 <div className={s.appWrapperContent}>
-                    <Route path='/profile' render={()=><Profile newPostText={props.state.ProfilePage.newPostText} posts={props.state.ProfilePage.posts}  dispatch={props.dispatch}  />}/>
+                    <Route path='/profile' render={()=><Profile profilePage={props.state.ProfilePage}  dispatch={props.dispatch}  />}/>
                     <Route path='/dialogs' render={()=><Dialogs dialogs={props.state.DialogsPage.dialogs} messages={props.state.DialogsPage.messages} newMessageText={props.state.DialogsPage.newMessageText} dispatch={props.dispatch}/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>

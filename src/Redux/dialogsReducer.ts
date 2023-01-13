@@ -1,18 +1,33 @@
-import {DialogsPageType, dispatchActionType} from "./State";
+import {dispatchActionType} from "./Store";
 
-export const dialogsReducer = (state: DialogsPageType, action: dispatchActionType) => {
+const initialState = {
+    dialogs: [
+        {id: 1, name: 'Alex'},
+        {id: 2, name: 'Andrew'},
+        {id: 3, name: 'Maxim'},
+    ],
+    messages: [
+        {id: 1, message: 'Hi, have a good day!!'},
+        {id: 2, message: 'Go to the DREAM'},
+        {id: 3, message: 'Good luck'},
+    ],
+    newMessageText: ''
+}
+
+export const dialogsReducer = (state = initialState, action: dispatchActionType) => {
     switch (action.type) {
         case "SEND-NEW-MESSAGE-TEXT": {
             const newMessage = {
                 id: 1,
-                message: action.payload.newMessageText
+                message: state.newMessageText
             }
             state.messages.push(newMessage)
             state.newMessageText = ''
             return state
         }
         case "UPDATE-NEW-MESSAGE-TEXT": {
-            return state.newMessageText = action.payload.message
+            state.newMessageText = action.payload.message
+            return state
         }
         default: {
             return state

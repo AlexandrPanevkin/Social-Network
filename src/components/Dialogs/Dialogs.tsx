@@ -6,7 +6,7 @@ import {
     DialogsType,
     dispatchActionType,
     MessagesType,
-} from "../../Redux/State";
+} from "../../Redux/Store";
 import postUserSvg from "../../assets/img/postUser.png";
 import { sendNewMessageTextAC, updateNewMessageTextAC } from "../../Redux/dialogsReducer";
 
@@ -20,9 +20,9 @@ export type DialogsPropsType = {
 export const Dialogs = (props: DialogsPropsType) => {
 
 
-    let dialogsElements = props.dialogs.map(dialog => <DialogItem id={dialog.id} name={dialog.name}/>)
+    let dialogsElements = props.dialogs.map(dialog => <DialogItem key={dialog.id} id={dialog.id} name={dialog.name}/>)
 
-    let messagesElements = props.messages.map(message => <div className={s.imageAndText}><img className={s.messageImg}
+    let messagesElements = props.messages.map(message => <div key={message.id} className={s.imageAndText}><img className={s.messageImg}
                                                                                               src={postUserSvg}/><span
         className={s.message}> <Message
         id={message.id} message={message.message}/></span></div>)
