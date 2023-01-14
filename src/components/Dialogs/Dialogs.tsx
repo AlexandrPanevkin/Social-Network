@@ -10,7 +10,8 @@ export type DialogsPropsType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
     newMessageText: string
-    dispatch:(action: any)=>void
+    sendMessage:()=>void
+    messageChange:(newMessage:string)=>void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -24,11 +25,11 @@ export const Dialogs = (props: DialogsPropsType) => {
         id={message.id} message={message.message}/></span></div>)
 
     const onSendMessageClickHandler = () => {
-      props.dispatch(sendNewMessageTextAC(props.newMessageText))
+     props.sendMessage()
     }
 
     const onMessageChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewMessageTextAC(event.currentTarget.value))
+        props.messageChange(event.currentTarget.value)
     }
 
     return (

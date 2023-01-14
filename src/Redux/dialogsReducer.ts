@@ -30,7 +30,7 @@ export const dialogsReducer = (state:initialStateType = initialState, action: Di
     switch (action.type) {
         case "SEND-NEW-MESSAGE-TEXT": {
             const newMessage = {
-                id: 1,
+                id: Math.random(),
                 message: state.newMessageText
             }
             state.messages.push(newMessage)
@@ -47,12 +47,9 @@ export const dialogsReducer = (state:initialStateType = initialState, action: Di
     }
 }
 
-export const sendNewMessageTextAC = (newMessageText: string) => {
+export const sendNewMessageTextAC = () => {
     return {
         type: 'SEND-NEW-MESSAGE-TEXT',
-        payload: {
-            newMessageText
-        }
     } as const
 }
 
