@@ -1,6 +1,8 @@
 .navbar {
     grid-area: n;
     background-color: #406d73;
+    /*background-color: #427AA1;*/
+    /*background-color: #5C415D;*/
     padding-top: 15px;
 }
 

@@ -1,55 +1,32 @@
 import {addPostAC, profileReducer, updateNewPostTextAC} from "./profileReducer";
 import {dialogsReducer, sendNewMessageTextAC, updateNewMessageTextAC} from "./dialogsReducer";
 
-export type postsType = {
-    id: number
-    message: string
-    likesCount: number
-}
 
-export type DialogsType = {
-    id: number
-    name: string
-}
 
-export type MessagesType = {
-    id: number
-    message: string
-}
 
-export type ProfilePageType = {
-    posts: postsType[]
-    newPostText: string
-}
+// export type ProfilePageType = {
+//     posts: postsType[]
+//     newPostText: string
+// }
+//
+// export type DialogsPageType = {
+//     dialogs: DialogsType[]
+//     messages: MessagesType[]
+//     newMessageText: string
+// }
+//
+// export type stateType = {
+//     ProfilePage: ProfilePageType
+//     DialogsPage: DialogsPageType
+// }
 
-export type DialogsPageType = {
-    dialogs: DialogsType[]
-    messages: MessagesType[]
-    newMessageText: string
-}
-
-export type stateType = {
-    ProfilePage: ProfilePageType
-    DialogsPage: DialogsPageType
-}
-
-export type StoreType = {
-    _state: stateType
-    rerenderEntireTree: () => void
-    subscribe: (callback: () => void) => void
-    getState: () => stateType
-    dispatch: (action: dispatchActionType) => void
-}
-
-export type dispatchActionType = addPostActionType | updateNewPostActionType | sendNewMessageTextACType | updateNewMessageTextACType
-
-type addPostActionType = ReturnType<typeof addPostAC>
-
-type updateNewPostActionType = ReturnType<typeof updateNewPostTextAC>
-
-type sendNewMessageTextACType = ReturnType<typeof sendNewMessageTextAC>
-
-type updateNewMessageTextACType = ReturnType<typeof updateNewMessageTextAC>
+// export type StoreType = {
+//     _state: stateType
+//     rerenderEntireTree: () => void
+//     subscribe: (callback: () => void) => void
+//     getState: () => stateType
+//     dispatch: (action: dispatchActionType) => void
+// }
 
 // export const store: StoreType = {
 //     _state: {

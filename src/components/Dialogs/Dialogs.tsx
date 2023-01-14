@@ -2,19 +2,15 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {
-    DialogsType,
-    dispatchActionType,
-    MessagesType,
-} from "../../Redux/Store";
 import postUserSvg from "../../assets/img/postUser.png";
 import { sendNewMessageTextAC, updateNewMessageTextAC } from "../../Redux/dialogsReducer";
+import {DialogsType, MessagesType} from "../../Redux/reduxStore";
 
 export type DialogsPropsType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
     newMessageText: string
-    dispatch:(action: dispatchActionType)=>void
+    dispatch:(action: any)=>void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {

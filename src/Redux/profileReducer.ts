@@ -1,9 +1,16 @@
-import {dispatchActionType, postsType, ProfilePageType} from "./Store";
+import {postsType} from "./reduxStore";
 
 type initialStateType = {
     posts: postsType[],
     newPostText:string
 }
+
+type ProfileReducerActionType = addPostActionType | updateNewPostActionType
+
+type addPostActionType = ReturnType<typeof addPostAC>
+
+type updateNewPostActionType = ReturnType<typeof updateNewPostTextAC>
+
 const initialState: initialStateType = {
     posts: [
         {id: 1, message: 'post1', likesCount: 7},
@@ -13,11 +20,11 @@ const initialState: initialStateType = {
     newPostText: ''
 }
 
-export const profileReducer = (state: initialStateType =initialState, action: dispatchActionType): initialStateType => {
+export const profileReducer = (state: initialStateType =initialState, action: ProfileReducerActionType): initialStateType => {
     switch (action.type) {
         case "ADD-POST": {
             const newPost = {
-                id: 1,
+                id: Math.random(),
                 message: state.newPostText,
                 likesCount: 7
             }
@@ -35,12 +42,9 @@ export const profileReducer = (state: initialStateType =initialState, action: di
     }
 }
 
-export const addPostAC = (newPostText: string) => {
+export const addPostAC = () => {
     return {
-        type: 'ADD-POST',
-        payload: {
-            postMessage: newPostText
-        }
+        type: 'ADD-POST'
     } as const
 }
 

@@ -1,6 +1,8 @@
 .header {
     grid-area: h;
     background-color: indianred;
+    /*background-color: #064789;*/
+    /*background-color: #FFFC31;*/
 }
 
 .header__logo-icon {

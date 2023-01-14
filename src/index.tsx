@@ -10,7 +10,7 @@ export type RootState = ReturnType<typeof store.getState>
 export let rerenderEntireTree = (state: RootState) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state} dispatch={store.dispatch.bind(store)}/>
+            <App state={state} store={store}/>
         </BrowserRouter>,
         document.getElementById('root')
     );
@@ -21,5 +21,4 @@ store.subscribe(() => {
     rerenderEntireTree(state);
 });
 
-// rerenderEntireTree(store.getState())
-// store.subscribe(()=>rerenderEntireTree(store.getState()))
+// dispatch={store.dispatch.bind(store)}
