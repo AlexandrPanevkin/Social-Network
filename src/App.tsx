@@ -11,20 +11,20 @@ import {Settings} from "./components/Settings/Settings";
 import {stateType, StoreType} from "./Redux/reduxStore";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
-type AppPropsType = {
-    state: stateType
-    store: StoreType
-}
+// type AppPropsType = {
+//     state: stateType
+//     store: StoreType
+// }
 
-const App = (props: AppPropsType) => {
+const App = () => {
     return (
         <BrowserRouter>
             <div className={s.appWrapper}>
                 <Header/>
                 <Navbar/>
                 <div className={s.appWrapperContent}>
-                    <Route path='/profile' render={()=><Profile store={props.store}  />}/>
-                    <Route path='/dialogs' render={()=><DialogsContainer store={props.store}/>}/>
+                    <Route path='/profile' render={()=><Profile />}/>
+                    <Route path='/dialogs' render={()=><DialogsContainer />}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>

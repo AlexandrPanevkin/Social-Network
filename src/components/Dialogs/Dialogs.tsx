@@ -3,7 +3,6 @@ import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import postUserSvg from "../../assets/img/postUser.png";
-import { sendNewMessageTextAC, updateNewMessageTextAC } from "../../Redux/dialogsReducer";
 import {DialogsType, MessagesType} from "../../Redux/reduxStore";
 
 export type DialogsPropsType = {

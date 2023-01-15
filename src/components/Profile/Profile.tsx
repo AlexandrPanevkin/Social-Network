@@ -4,11 +4,11 @@ import s from './Profile.module.css';
 import {StoreType} from "../../Redux/reduxStore";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
-export type ProfilePropsType = {
-    store: StoreType
-}
+// export type ProfilePropsType = {
+//     store: StoreType
+// }
 
-export const Profile = (props: ProfilePropsType) => {
+export const Profile = () => {
     return (
         <div className={s.profile}>
             <div>
@@ -17,7 +17,7 @@ export const Profile = (props: ProfilePropsType) => {
             <div>
                 My profile
             </div>
-            <MyPostsContainer store={props.store}/>
+            <MyPostsContainer/>
         </div>
     )
 }
