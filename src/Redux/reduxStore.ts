@@ -34,11 +34,9 @@ export type stateType = {
     DialogsPage: DialogsPageType
 }
 
-export type StoreType =typeof store
-
-const reducers = combineReducers({
+const rootReducer = combineReducers({
     ProfilePage: profileReducer,
     DialogsPage: dialogsReducer
 })
 
-export const store = createStore(reducers);
+export const store = createStore(rootReducer);

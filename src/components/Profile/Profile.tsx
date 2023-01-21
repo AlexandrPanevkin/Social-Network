@@ -1,12 +1,8 @@
 import React from "react";
 import mainJpg from "../../assets/img/main.jpg";
 import s from './Profile.module.css';
-import {StoreType} from "../../Redux/reduxStore";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
-// export type ProfilePropsType = {
-//     store: StoreType
-// }
 
 export const Profile = () => {
     return (
