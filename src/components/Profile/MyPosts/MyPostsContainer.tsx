@@ -1,46 +1,25 @@
 import React from "react";
-import {addPostAC, updateNewPostTextAC} from "../../../Redux/profileReducer";
+import {addPostAC, InitialStateProfileType, updateNewPostTextAC} from "../../../Redux/profileReducer";
 import {MyPosts} from "./MyPosts";
-import {stateType} from "../../../Redux/reduxStore";
 import {connect} from "react-redux";
+import {StateType} from "../../../Redux/reduxStore";
+import {Dispatch} from "redux";
 
-// type MyPostsContainerPropsType = {
-//     store?: StoreType
-// }
-//
-// export const MyPostsContainer = (props: MyPostsContainerPropsType) => {
-//     return (
-//         <StoreContext.Consumer>
-//             {store => {
-//
-//                 const state = store.getState()
-//                 const onAddPost = () => {
-//                     store.dispatch(addPostAC())
-//                 }
-//
-//                 const onPostChange = (newText: string) => {
-//                     store.dispatch(updateNewPostTextAC(newText))
-//                 }
-//                 return <MyPosts updateNewPostText={onPostChange} addPost={onAddPost}
-//                                 posts={state.ProfilePage.posts}
-//                                 newPostText={state.ProfilePage.newPostText}/>
-//             }
-//             }
-//
-//         </StoreContext.Consumer>
-//
-//     )
-// }
+type mapDispatchToProfilePropsType = {
+    updateNewPostText: (newText: string) => void
+    addPost: () => void
+}
 
-const mapStateToProps = (state: stateType) => {
+export type ProfilePropsType = InitialStateProfileType & mapDispatchToProfilePropsType
+
+const mapStateToProps = (state: StateType): InitialStateProfileType => {
     return {
         posts: state.ProfilePage.posts,
         newPostText: state.ProfilePage.newPostText
     }
-
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToProfilePropsType => {
     return {
         updateNewPostText: (newText: string) => {
             dispatch(updateNewPostTextAC(newText))

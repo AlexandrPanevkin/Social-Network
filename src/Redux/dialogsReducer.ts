@@ -1,32 +1,36 @@
-import {DialogsType, MessagesType} from "./reduxStore";
-
 export type DialogsReducerActionType = sendNewMessageTextACType | updateNewMessageTextACType
 
 type sendNewMessageTextACType = ReturnType<typeof sendNewMessageTextAC>
 
 type updateNewMessageTextACType = ReturnType<typeof updateNewMessageTextAC>
 
-type initialStateType = {
-    dialogs: DialogsType[]
-    messages: MessagesType[]
-    newMessageText: string
+export type DialogsType = {
+    id: number
+    name: string
 }
 
-const initialState: initialStateType = {
+export type MessagesType = {
+    id: number
+    message: string
+}
+
+const initialState = {
     dialogs: [
         {id: 1, name: 'Alex'},
         {id: 2, name: 'Andrew'},
         {id: 3, name: 'Maxim'},
-    ],
+    ] as DialogsType[],
     messages: [
         {id: 1, message: 'Hi, have a good day!!'},
         {id: 2, message: 'Go to the DREAM'},
         {id: 3, message: 'Good luck'},
-    ],
+    ] as MessagesType[],
     newMessageText: ''
 }
 
-export const dialogsReducer = (state:initialStateType = initialState, action: DialogsReducerActionType): initialStateType => {
+export type InitialStateDialogsType = typeof initialState
+
+export const dialogsReducer = (state:InitialStateDialogsType = initialState, action: DialogsReducerActionType):InitialStateDialogsType => {
     switch (action.type) {
         case "SEND-NEW-MESSAGE-TEXT": {
             const newMessage = {

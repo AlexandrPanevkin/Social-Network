@@ -1,8 +1,7 @@
-import {postsType} from "./reduxStore";
-
-type initialStateType = {
-    posts: postsType[],
-    newPostText:string
+export type postsType = {
+    id: number
+    message: string
+    likesCount: number
 }
 
 type ProfileReducerActionType = addPostActionType | updateNewPostActionType
@@ -11,16 +10,18 @@ type addPostActionType = ReturnType<typeof addPostAC>
 
 type updateNewPostActionType = ReturnType<typeof updateNewPostTextAC>
 
-const initialState: initialStateType = {
+const initialState = {
     posts: [
         {id: 1, message: 'post1', likesCount: 7},
         {id: 2, message: 'post2', likesCount: 2},
         {id: 3, message: 'post3', likesCount: 4},
-    ],
+    ] as postsType[],
     newPostText: ''
 }
 
-export const profileReducer = (state: initialStateType =initialState, action: ProfileReducerActionType): initialStateType => {
+export type InitialStateProfileType = typeof initialState
+
+export const profileReducer = (state: InitialStateProfileType = initialState, action: ProfileReducerActionType): InitialStateProfileType => {
     switch (action.type) {
         case "ADD-POST": {
             const newPost = {
