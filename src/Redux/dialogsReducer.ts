@@ -30,20 +30,17 @@ const initialState = {
 
 export type InitialStateDialogsType = typeof initialState
 
-export const dialogsReducer = (state:InitialStateDialogsType = initialState, action: DialogsReducerActionType):InitialStateDialogsType => {
+export const dialogsReducer = (state: InitialStateDialogsType = initialState, action: DialogsReducerActionType): InitialStateDialogsType => {
     switch (action.type) {
         case "SEND-NEW-MESSAGE-TEXT": {
             const newMessage = {
                 id: Math.random(),
                 message: state.newMessageText
             }
-            state.messages.push(newMessage)
-            state.newMessageText = ''
-            return state
+            return {...state, messages: [newMessage, ...state.messages], newMessageText: ''}
         }
         case "UPDATE-NEW-MESSAGE-TEXT": {
-            state.newMessageText = action.payload.message
-            return state
+            return {...state, newMessageText: action.payload.message}
         }
         default: {
             return state
