@@ -1,0 +1,39 @@
+
+.users {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.usersContainer {
+    display: flex;
+    padding: 15px;
+}
+
+.userInfoBox {
+padding-left: 25px;
+padding-top: 25px;
+align-content: center;
+}
+
+.userIcon {
+    width: 150px;
+    height: 150px;
+    background-color: #a24848;
+    border-radius: 50%;
+}
+
+.button {
+    margin: 10px 0px 0px 0px;
+    padding: 10px 35px 10px 35px;
+    border-radius: 20px;
+    background: #0066CC;
+    color: #fff;
+    height: 40px;
+}
+
+.button:hover {
+    background: red;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+}

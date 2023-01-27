@@ -1,6 +1,5 @@
 export type UsersType = {
     id: number
-    photoUrl: string
     followed: boolean
     fullName: string
     status: string
@@ -11,25 +10,22 @@ const initialState = {
     users: [
         {
             id: 1,
-            photoUrl: 'https://c.pxhere.com/images/0f/3f/4dbc54d34a6b984a6c5f283be804-1447673.jpg!d',
             followed: true,
-            fullName: 'Alex',
+            fullName: 'Alex Ivanov',
             status: 'I am boss',
             location: 'Minsk'
         },
         {
             id: 2,
-            photoUrl: 'https://c.pxhere.com/images/0f/3f/4dbc54d34a6b984a6c5f283be804-1447673.jpg!d',
             followed: false,
-            fullName: 'Max',
+            fullName: 'Max Collman',
             status: 'I am boss too',
             location: 'Moscow'
         },
         {
             id: 3,
-            photoUrl: 'https://c.pxhere.com/images/0f/3f/4dbc54d34a6b984a6c5f283be804-1447673.jpg!d',
             followed: true,
-            fullName: 'Andrew',
+            fullName: 'Andrew Garfield',
             status: 'Yes, I am boss',
             location: 'London'
         },
