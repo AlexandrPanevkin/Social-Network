@@ -1,34 +1,16 @@
 export type UsersType = {
+    name: string
     id: number
-    followed: boolean
-    fullName: string
+    photos: {
+        small: string
+        large: string
+    },
     status: string
-    location: string
+    followed: boolean
 }
 
 const initialState = {
     users: [
-        {
-            id: 1,
-            followed: true,
-            fullName: 'Alex Ivanov',
-            status: 'I am boss',
-            location: 'Minsk'
-        },
-        {
-            id: 2,
-            followed: false,
-            fullName: 'Max Collman',
-            status: 'I am boss too',
-            location: 'Moscow'
-        },
-        {
-            id: 3,
-            followed: true,
-            fullName: 'Andrew Garfield',
-            status: 'Yes, I am boss',
-            location: 'London'
-        },
 
     ] as UsersType[],
 }
