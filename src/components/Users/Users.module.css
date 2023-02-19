@@ -8,6 +8,7 @@
 .usersContainer {
     display: flex;
     padding: 15px;
+
 }
 
 .userInfoBox {
@@ -36,4 +37,17 @@ align-content: center;
     background: red;
     cursor: pointer;
     transition: background-color 0.15s ease-in-out;
+}
+
+.selectedPage {
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.page {
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer;
 }

@@ -11,8 +11,10 @@ export type UsersType = {
 
 const initialState = {
     users: [
-
     ] as UsersType[],
+    pageSize: 4,
+    totalUsersCount: 25,
+    currentPage: 3
 }
 
 export type InitialStateUsersType = typeof initialState
@@ -32,7 +34,13 @@ export const usersReducer = (state: InitialStateUsersType = initialState, action
             }
         }
         case "SET-USERS": {
-            return {...state, users: [...state.users, ...action.payload.users]}
+            return {...state, users: [...action.payload.users]}
+        }
+        case "SET-PAGE": {
+            return {...state, currentPage: action.payload.page}
+        }
+        case "SET-TOTAL-USERS-COUNT": {
+            return {...state, totalUsersCount: action.payload.totalUsersCount}
         }
         default: {
             return state
@@ -40,7 +48,7 @@ export const usersReducer = (state: InitialStateUsersType = initialState, action
     }
 }
 
-type usersReducerActionType = followACType | unfollowACType | setUsersACType
+type usersReducerActionType = followACType | unfollowACType | setUsersACType | setPageACType | setTotalUsersCountACType
 
 type followACType = ReturnType<typeof followAC>
 
@@ -75,3 +83,22 @@ return {
 } as const
 }
 
+type setPageACType = ReturnType<typeof setPageAC>
+export const setPageAC = (page: number) => {
+    return {
+        type: 'SET-PAGE',
+        payload: {
+            page
+        }
+    } as const
+}
+
+type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
+export const setTotalUsersCountAC = (totalUsersCount: number) => {
+    return {
+        type: 'SET-TOTAL-USERS-COUNT',
+        payload: {
+            totalUsersCount
+        }
+    } as const
+}
