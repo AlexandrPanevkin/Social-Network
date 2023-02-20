@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {Users} from "./Users";
 import {StateType} from "../../Redux/reduxStore";
 import {Dispatch} from "redux";
 import {
@@ -12,7 +11,9 @@ import {
     unfollowAC,
     UsersType
 } from "../../Redux/usersReducer";
-import {UsersC} from "./UsersС";
+
+import axios from "axios";
+import {Users} from "./Users";
 
 export type mapDispatchUsersPropsType = {
     follow: (userId: number) => void
@@ -22,7 +23,43 @@ export type mapDispatchUsersPropsType = {
     setTotalUsersCount: (totalUsersCount: number) => void
 }
 
-export type UsersPropsType = InitialStateUsersType & mapDispatchUsersPropsType
+export type UsersContainerPropsType = InitialStateUsersType & mapDispatchUsersPropsType
+
+export class UsersClassContainer extends React.Component<UsersContainerPropsType, InitialStateUsersType> {
+
+    constructor(props: UsersContainerPropsType) {
+        super(props);
+    }
+
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+            this.props.setTotalUsersCount(response.data.totalCount)
+        })
+    }
+
+    onPageChange = (page: number) => {
+        this.props.setPage(page)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+        })
+    }
+
+    render() {
+        return <Users
+            totalUsersCount={this.props.totalUsersCount}
+            pageSize={this.props.pageSize}
+            setPage={this.onPageChange}
+            currentPage={this.props.currentPage}
+            users={this.props.users}
+            follow={this.props.follow}
+            unfollow={this.props.unfollow}
+        />
+
+
+    }
+}
+
 
 const mapStateToProps = (state: StateType): InitialStateUsersType => {
     return {
@@ -50,7 +87,7 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchUsersPropsType => {
         setTotalUsersCount: (totalUsersCount: number) => {
             dispatch(setTotalUsersCountAC(totalUsersCount))
         }
-}
+    }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersC)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClassContainer)
