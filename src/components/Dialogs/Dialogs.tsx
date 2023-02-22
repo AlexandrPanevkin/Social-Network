@@ -6,7 +6,6 @@ import postUserSvg from "../../assets/img/postUser.png";
 import {DialogsPropsType} from "./DialogsContainer";
 
 export const Dialogs = (props: DialogsPropsType) => {
-debugger
 
     let dialogsElements = props.dialogs.map(dialog => <DialogItem key={dialog.id} id={dialog.id} name={dialog.name}/>)
 
@@ -17,11 +16,11 @@ debugger
         id={message.id} message={message.message}/></span></div>)
 
     const onSendMessageClickHandler = () => {
-        props.sendMessage()
+        props.sendNewMessageText()
     }
 
     const onMessageChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.messageChange(event.currentTarget.value)
+        props.updateNewMessageText(event.currentTarget.value)
     }
     return (
         <div className={s.dialogs}>

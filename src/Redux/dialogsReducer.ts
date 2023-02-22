@@ -1,8 +1,8 @@
-export type DialogsReducerActionType = sendNewMessageTextACType | updateNewMessageTextACType
+export type DialogsReducerActionType = sendNewMessageTextType | updateNewMessageTextType
 
-type sendNewMessageTextACType = ReturnType<typeof sendNewMessageTextAC>
+type sendNewMessageTextType = ReturnType<typeof sendNewMessageText>
 
-type updateNewMessageTextACType = ReturnType<typeof updateNewMessageTextAC>
+type updateNewMessageTextType = ReturnType<typeof updateNewMessageText>
 
 export type DialogsType = {
     id: number
@@ -48,13 +48,13 @@ export const dialogsReducer = (state: InitialStateDialogsType = initialState, ac
     }
 }
 
-export const sendNewMessageTextAC = () => {
+export const sendNewMessageText = () => {
     return {
         type: 'SEND-NEW-MESSAGE-TEXT',
     } as const
 }
 
-export const updateNewMessageTextAC = (messageText: string) => {
+export const updateNewMessageText = (messageText: string) => {
     return {
         type: 'UPDATE-NEW-MESSAGE-TEXT',
         payload: {
