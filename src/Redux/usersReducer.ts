@@ -14,7 +14,7 @@ const initialState = {
     ] as UsersType[],
     pageSize: 4,
     totalUsersCount: 25,
-    currentPage: 3,
+    currentPage: 1,
     isFetching: false
 }
 

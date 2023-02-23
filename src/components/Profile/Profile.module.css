@@ -9,3 +9,30 @@
     border: 3px solid black;
 
 }
+
+.usersProfileBox {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+}
+
+.profileInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.profileFullName {
+    font-weight: bold;
+    font-size: 26px;
+    padding-bottom: 20px;
+}
+
+.profileDescription {
+    padding-left: 50px;
+}

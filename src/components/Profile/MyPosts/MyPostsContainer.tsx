@@ -15,7 +15,8 @@ export type ProfilePropsType = InitialStateProfileType & mapDispatchToProfilePro
 const mapStateToProps = (state: StateType): InitialStateProfileType => {
     return {
         posts: state.ProfilePage.posts,
-        newPostText: state.ProfilePage.newPostText
+        newPostText: state.ProfilePage.newPostText,
+        profile: state.ProfilePage.profile
     }
 }
 

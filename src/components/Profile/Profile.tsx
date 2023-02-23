@@ -1,18 +1,17 @@
 import React from "react";
-import mainJpg from "../../assets/img/main.jpg";
 import s from './Profile.module.css';
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {ProfileType} from "../../Redux/profileReducer";
 
+type ProfilePropsType = {
+    profile: ProfileType | null
+}
 
-export const Profile = () => {
+export const Profile = (props: ProfilePropsType) => {
     return (
         <div className={s.profile}>
-            <div>
-                <img className={s.profileIcon} src={mainJpg} alt="Main"/>
-            </div>
-            <div>
-                My profile
-            </div>
+            <ProfileInfo profile={props.profile}/>
             <MyPostsContainer/>
         </div>
     )

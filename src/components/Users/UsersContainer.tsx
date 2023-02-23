@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {StateType} from "../../Redux/reduxStore";
-import {Dispatch} from "redux";
 import {
     follow,
     InitialStateUsersType,
