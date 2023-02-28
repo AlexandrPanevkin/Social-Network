@@ -14,6 +14,7 @@ import {
 import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../Common/Preloader/Preloader";
+import {getUsers} from "../../api/api";
 
 export type mapDispatchUsersPropsType = {
     follow: (userId: number) => void
@@ -34,9 +35,7 @@ export class UsersClassContainer extends React.Component<UsersContainerPropsType
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        }).then(response => {
+        getUsers(this.props.currentPage, this.props.pageSize).then(response => {
             this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
@@ -46,9 +45,7 @@ export class UsersClassContainer extends React.Component<UsersContainerPropsType
     onPageChange = (page: number) => {
         this.props.setPage(page)
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        }).then(response => {
+        getUsers(page, this.props.pageSize).then(response => {
             this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items)
         })
