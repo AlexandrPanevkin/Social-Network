@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {StateType} from "../../Redux/reduxStore";
 import {
-    follow, followingInProgress,
+    follow, followingInProgress, getUsersThunkCreator,
     InitialStateUsersType,
     setPage,
     setTotalUsersCount,
@@ -34,12 +34,13 @@ export class UsersClassContainer extends React.Component<UsersContainerPropsType
     }
 
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(data.items)
-            this.props.setTotalUsersCount(data.totalCount)
-        })
+        // this.props.toggleIsFetching(true)
+        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+        //     this.props.toggleIsFetching(false)
+        //     this.props.setUsers(data.items)
+        //     this.props.setTotalUsersCount(data.totalCount)
+        // })
+        getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChange = (page: number) => {
@@ -92,5 +93,6 @@ export const UsersContainer = connect(mapStateToProps, {
     setPage,
     setTotalUsersCount,
     toggleIsFetching,
-    followingInProgress
+    followingInProgress,
+    getUsersThunkCreator
 })(UsersClassContainer)

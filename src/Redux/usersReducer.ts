@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/usersAPI";
+
 export type UsersType = {
     name: string
     id: number
@@ -59,7 +61,6 @@ export const usersReducer = (state: InitialStateUsersType = initialState, action
 type usersReducerActionType = followACType | unfollowACType | setUsersACType | setPageACType | setTotalUsersCountACType | isFetchingACType | followingInProgressACType
 
 type followACType = ReturnType<typeof follow>
-
 export const follow = (userId: number) => {
     return {
         type: 'FOLLOW',
@@ -70,7 +71,6 @@ export const follow = (userId: number) => {
 }
 
 type unfollowACType = ReturnType<typeof unfollow>
-
 export const unfollow = (userId: number) => {
     return {
         type: 'UNFOLLOW',
@@ -81,7 +81,6 @@ export const unfollow = (userId: number) => {
 }
 
 type setUsersACType = ReturnType<typeof setUsers>
-
 export const setUsers = (users: UsersType[]) => {
 return {
     type: 'SET-USERS',
@@ -129,4 +128,16 @@ export const followingInProgress = (toggleFollowing: boolean) => {
             toggleFollowing
         }
     } as const
+}
+
+
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: any) => {
+        dispatch(toggleIsFetching(true))
+        usersAPI.getUsers(currentPage, pageSize).then(data => {
+           dispatch(toggleIsFetching(false))
+           dispatch((data.items))
+           dispatch(setTotalUsersCount(data.totalCount))
+        })
+    }
 }
