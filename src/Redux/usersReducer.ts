@@ -1,5 +1,5 @@
-import {usersAPI} from "../api/usersAPI";
 import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 export type UsersType = {
     name: string
@@ -22,7 +22,7 @@ export type InitialStateUsersType = {
 
 const initialState = {
     users: [] as UsersType[],
-    pageSize: 4,
+    pageSize: 5,
     totalUsersCount: 25,
     currentPage: 1,
     isFetching: false,
