@@ -4,8 +4,9 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import postUserSvg from "../../assets/img/postUser.png";
 import {DialogsPropsType} from "./DialogsContainer";
+import {Redirect} from "react-router-dom";
 
-export const Dialogs = (props: DialogsPropsType) => {
+export const Dialogs = (props: DialogsPropsType & {isAuth: boolean}) => {
 
     let dialogsElements = props.dialogs.map(dialog => <DialogItem key={dialog.id} id={dialog.id} name={dialog.name}/>)
 
@@ -22,6 +23,8 @@ export const Dialogs = (props: DialogsPropsType) => {
     const onMessageChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateNewMessageText(event.currentTarget.value)
     }
+
+    if(!props.isAuth) return <Redirect to={'/login'}/>
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>

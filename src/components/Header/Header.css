@@ -5,6 +5,7 @@
     /*background-color: #FFFC31;*/
     display: flex;
     justify-content: space-between;
+    /*max-height: 100px;*/
 }
 
 .header__logo-icon {
