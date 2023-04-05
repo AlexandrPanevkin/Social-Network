@@ -5,11 +5,11 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
 import UsersClassContainer from "./components/Users/UsersContainer";
 import {Login} from "./components/Login/Login";
-import {ProfileContainer} from "./components/Profile/ProfileContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 const App = () => {
     return (
