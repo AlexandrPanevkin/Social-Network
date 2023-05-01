@@ -1,14 +1,10 @@
 import React, {FC} from "react";
-import {
-    getStatus,
-    getUserProfile,
-    InitialStateProfileType, updateStatus,
-} from "../../Redux/profileReducer";
+import {getStatus, getUserProfile, InitialStateProfileType, updateStatus,} from "../../Redux/profileReducer";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {StateType} from "../../Redux/reduxStore";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import withAuthRedirect, {WithAuthRedirect} from "../../hoc/withAuthRedirect";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 type pathParamsType = {
@@ -28,6 +24,7 @@ class ProfileContainer extends React.Component<PropsType, InitialStateProfileTyp
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
+            debugger
             userId = '24149'
         }
         this.props.getUserProfile(userId)

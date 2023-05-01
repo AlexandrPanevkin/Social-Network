@@ -26,16 +26,27 @@ export class ProfileStatus extends React.Component<statusPropsType> {
             status: e.currentTarget.value
         })
     }
+    componentDidUpdate(prevProps: Readonly<statusPropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        debugger
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
+    }
 
     render() {
         return (
             <div>
-                {this.state.editMode ?
-                    <div>
-                        <input autoFocus onChange={this.onStatusChange} onBlur={this.deactivateEditMode} value={this.state.status}/>
-                    </div> :
+                {!this.state.editMode &&
                     <div>
                         <span onDoubleClick={this.activateEditMode}>{this.props.status || 'There is no status'}</span>
+                    </div>
+                }
+                {this.state.editMode &&
+                    <div>
+                        <input autoFocus onChange={this.onStatusChange} onBlur={this.deactivateEditMode.bind(this)}
+                               value={this.state.status}/>
                     </div>
                 }
             </div>

@@ -114,21 +114,19 @@ export const setStatus = (status: string) => {
     } as const
 }
 
-export const getUserProfile = (userId: string) => (dispatch: Dispatch<any>) => {
+export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
     profileAPI.getProfile(userId).then(response => {
-
         dispatch(setUserProfile(response.data))
     })
 }
 
-export const getStatus = (userId: string) => (dispatch: Dispatch<any>) => {
+export const getStatus = (userId: string) => (dispatch: Dispatch) => {
     profileAPI.getStatus(userId).then(response => {
-        console.log(response.data)
         dispatch(setStatus(response.data))
     })
 }
 
-export const updateStatus = (status: string) => (dispatch: Dispatch<any>) => {
+export const updateStatus = (status: string) => (dispatch: Dispatch) => {
     profileAPI.updateProfileStatus(status).then(response => {
         if (response.data.resultCode === 0) {
             dispatch(setStatus(status))
