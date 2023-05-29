@@ -53,8 +53,6 @@ class UsersClassContainer extends React.Component<UsersContainerPropsType, Initi
                 />
             }
         </>
-
-
     }
 }
 
