@@ -1,17 +1,27 @@
 import React from 'react';
 import {useFormik} from "formik";
 
+type FormikErrorType = {
+    email?: string;
+    password?: string;
+    rememberMe?: boolean;
+};
+
 const validate = (values: any) => {
+    const errors: FormikErrorType = {};
     if (!values.email) {
-        return {
-            email: 'Email is required'
-        }
+        errors.email = "Email is required";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        errors.email = "Invalid email address";
     }
+
     if (!values.password) {
-        return {
-            password: 'Password is required'
-        }
+        errors.password = "Password is required";
+    } else if (values.password.length < 3) {
+        errors.password = "Must be 3 characters or more";
     }
+
+    return errors;
 };
 
 export const Login = () => {
@@ -24,7 +34,8 @@ export const Login = () => {
         },
         validate,
         onSubmit: values => {
-            alert(JSON.stringify(values));
+            alert(JSON.stringify(values))
+
         },
     })
 
@@ -37,10 +48,14 @@ export const Login = () => {
                             <input id="email"
                                       placeholder="email" {...formik.getFieldProps('email')}
                             />
+                            {formik.touched.email && formik.errors.email && <div style={{ color: "red" }}>{formik.errors.email}</div>}
                         </div>
                         <div>
                             <input
                                 type="password" {...formik.getFieldProps('password')} placeholder="password"/>
+                            {formik.touched.password && formik.errors.password && (
+                                <div style={{ color: "red" }}>{formik.errors.password}</div>
+                            )}
                         </div>
                         <div>
                             <input type="checkbox"
@@ -54,44 +69,3 @@ export const Login = () => {
         </div>
     );
 };
-
-// import React from "react";
-// import { Field, reduxForm } from "redux-form";
-//
-// const LoginForm = (props: any) => {
-//     return (
-//         <form onSubmit={props.handleSubmit}>
-//             <div>
-//                 <Field placeholder={"Login"} name={"login"} component={"input"} />
-//             </div>
-//             <div>
-//                 <Field placeholder={"Password"} name={"password"} component={"input"} />
-//             </div>
-//             <div>
-//                 <Field component={"input"} name={"rememberMe"} type={"checkbox"} />{" "}
-//                 Запомнить меня
-//             </div>
-//             <div>
-//                 <button>Login</button>
-//             </div>
-//         </form>
-//     );
-// };
-// const LoginReduxForm = reduxForm({
-//     form: "login",
-// })(LoginForm);
-//
-//
-// const Login = (props: any) => {
-//     const onSubmit = (FormData: any) => {
-//         console.log(FormData)
-//     }
-//     return (
-//         <div>
-//             <h1>LOGIN</h1>
-//             <LoginReduxForm onSubmit={onSubmit} />
-//         </div>
-//     );
-// };
-//
-// export default Login;
