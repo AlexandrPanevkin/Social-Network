@@ -1,4 +1,4 @@
-import {addPostAC, profileReducer, updateNewPostTextAC} from "./profileReducer";
+import {addPostAC, profileReducer} from "./profileReducer";
 import {dialogsReducer, sendNewMessageText} from "./dialogsReducer";
 
 

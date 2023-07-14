@@ -32,11 +32,9 @@ export type ProfileType = {
     photos: PhotosType
 }
 
-type ProfileReducerActionType = addPostActionType | updateNewPostActionType | setUserProfileType | setStatusType
+type ProfileReducerActionType = addPostActionType | setUserProfileType | setStatusType
 
 type addPostActionType = ReturnType<typeof addPostAC>
-
-type updateNewPostActionType = ReturnType<typeof updateNewPostTextAC>
 
 type setUserProfileType = ReturnType<typeof setUserProfile>
 
@@ -60,14 +58,11 @@ export const profileReducer = (state: InitialStateProfileType = initialState, ac
         case "ADD-POST": {
             const newPost = {
                 id: Math.random(),
-                message: state.newPostText,
+                message: action.newPost,
                 likesCount: 0
             }
             return {...state, posts: [newPost, ...state.posts], newPostText: ''}
 
-        }
-        case "UPDATE-NEW-POST-TEXT": {
-            return {...state, newPostText: action.payload.newText}
         }
         case "SET-USER-PROFILE": {
             return {...state, profile: action.payload.profile}
@@ -81,18 +76,10 @@ export const profileReducer = (state: InitialStateProfileType = initialState, ac
     }
 }
 
-export const addPostAC = () => {
+export const addPostAC = (newPost: string) => {
     return {
-        type: 'ADD-POST'
-    } as const
-}
-
-export const updateNewPostTextAC = (newText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        payload: {
-            newText
-        }
+        type: 'ADD-POST',
+        newPost
     } as const
 }
 

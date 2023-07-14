@@ -16,8 +16,8 @@ export const Dialogs = (props: DialogsPropsType & { isAuth: boolean }) => {
         className={s.message}> <Message
         id={message.id} message={message.message}/></span></div>)
 
-    const onSendMessageClickHandler = (newMessage: valuesType) => {
-        props.sendNewMessageText(newMessage.message)
+    const onSendMessageClickHandler = (newMessage: string) => {
+        props.sendNewMessageText(newMessage)
     }
     // if(!props.isAuth) return <Redirect to={'/login'}/>
     return (
@@ -36,16 +36,17 @@ export const Dialogs = (props: DialogsPropsType & { isAuth: boolean }) => {
 }
 
 type AddItemFormPropsType = {
-    onSendMessageClickHandler: (newMessage: any) => void
+    onSendMessageClickHandler: (newMessage: string) => void
 }
 
 const AddItemForm = (props: AddItemFormPropsType) => {
 
     const formik = useFormik({
-        initialValues: {},
+        initialValues: {
+            message: ''
+        },
         onSubmit: values => {
-            props.onSendMessageClickHandler(values)
-
+            props.onSendMessageClickHandler(values.message)
         },
     })
 
@@ -58,7 +59,4 @@ const AddItemForm = (props: AddItemFormPropsType) => {
             </div>
         </form>
     )
-}
-export type valuesType = {
-    message: string
 }
