@@ -1,8 +1,7 @@
-export type DialogsReducerActionType = sendNewMessageTextType | updateNewMessageTextType
+export type DialogsReducerActionType = sendNewMessageTextType
 
 type sendNewMessageTextType = ReturnType<typeof sendNewMessageText>
 
-type updateNewMessageTextType = ReturnType<typeof updateNewMessageText>
 
 export type DialogsType = {
     id: number
@@ -24,8 +23,7 @@ const initialState = {
         {id: 1, message: 'Hi, have a good day!!'},
         {id: 2, message: 'Go to the DREAM'},
         {id: 3, message: 'Good luck'},
-    ] as MessagesType[],
-    newMessageText: ''
+    ] as MessagesType[]
 }
 
 export type InitialStateDialogsType = typeof initialState
@@ -35,12 +33,9 @@ export const dialogsReducer = (state: InitialStateDialogsType = initialState, ac
         case "SEND-NEW-MESSAGE-TEXT": {
             const newMessage = {
                 id: Math.random(),
-                message: state.newMessageText
+                message: action.newMessageText
             }
-            return {...state, messages: [newMessage, ...state.messages], newMessageText: ''}
-        }
-        case "UPDATE-NEW-MESSAGE-TEXT": {
-            return {...state, newMessageText: action.payload.message}
+            return {...state, messages: [newMessage, ...state.messages]}
         }
         default: {
             return state
@@ -48,17 +43,9 @@ export const dialogsReducer = (state: InitialStateDialogsType = initialState, ac
     }
 }
 
-export const sendNewMessageText = () => {
+export const sendNewMessageText = (newMessageText: string) => {
     return {
         type: 'SEND-NEW-MESSAGE-TEXT',
-    } as const
-}
-
-export const updateNewMessageText = (messageText: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-TEXT',
-        payload: {
-            message: messageText
-        }
+        newMessageText
     } as const
 }

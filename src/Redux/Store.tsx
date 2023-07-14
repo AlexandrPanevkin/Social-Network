@@ -1,5 +1,5 @@
 import {addPostAC, profileReducer, updateNewPostTextAC} from "./profileReducer";
-import {dialogsReducer, sendNewMessageText, updateNewMessageText} from "./dialogsReducer";
+import {dialogsReducer, sendNewMessageText} from "./dialogsReducer";
 
 
 
