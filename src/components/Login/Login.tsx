@@ -1,5 +1,7 @@
 import React from 'react';
 import {useFormik} from "formik";
+import {loginPropsType, mapDispatchToLoginPropsType} from "./LoginContainer";
+import {Redirect} from "react-router-dom";
 
 type FormikErrorType = {
     email?: string;
@@ -24,7 +26,8 @@ const validate = (values: any) => {
     return errors;
 };
 
-export const Login = () => {
+
+export const Login = ({login, isAuth}: loginPropsType) => {
 
     const formik = useFormik({
         initialValues: {
@@ -34,10 +37,13 @@ export const Login = () => {
         },
         validate,
         onSubmit: values => {
-            alert(JSON.stringify(values))
-
+            login(values.email, values.password, values.rememberMe)
         },
     })
+
+    if (isAuth) {
+        return <Redirect to={"profile"}/>;
+    }
 
     return (
         <div className="login-page">
@@ -46,15 +52,16 @@ export const Login = () => {
                     <form onSubmit={formik.handleSubmit} className="login-form">
                         <div>
                             <input id="email"
-                                      placeholder="email" {...formik.getFieldProps('email')}
+                                   placeholder="email" {...formik.getFieldProps('email')}
                             />
-                            {formik.touched.email && formik.errors.email && <div style={{ color: "red" }}>{formik.errors.email}</div>}
+                            {formik.touched.email && formik.errors.email &&
+                                <div style={{color: "red"}}>{formik.errors.email}</div>}
                         </div>
                         <div>
                             <input
                                 type="password" {...formik.getFieldProps('password')} placeholder="password"/>
                             {formik.touched.password && formik.errors.password && (
-                                <div style={{ color: "red" }}>{formik.errors.password}</div>
+                                <div style={{color: "red"}}>{formik.errors.password}</div>
                             )}
                         </div>
                         <div>
