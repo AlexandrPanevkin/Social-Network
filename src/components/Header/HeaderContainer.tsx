@@ -1,13 +1,12 @@
 import React from "react";
-import axios from "axios";
 import {connect} from "react-redux";
 import {StateType} from "../../Redux/reduxStore";
-import {InitialStateAuthType, getAuthUserData} from "../../Redux/authReducer";
+import {getAuthUserData, InitialStateAuthType, logout} from "../../Redux/authReducer";
 import {Header} from "./Header";
-import {authAPI} from "../../api/api";
 
 export type mapDispatchHeaderPropsType = {
     getAuthUserData: () => void
+    logout: () => void
 }
 export type MapStatePropsType = ReturnType<typeof mapStateToProps>
 export type HeaderPropsType = MapStatePropsType & mapDispatchHeaderPropsType
@@ -31,5 +30,5 @@ const mapStateToProps = (state: StateType) => ({
 
 
 export const HeaderContainer = connect(mapStateToProps, {
-    getAuthUserData
+    getAuthUserData, logout
 })(HeaderClassContainer)

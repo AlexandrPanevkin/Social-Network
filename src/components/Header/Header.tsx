@@ -5,10 +5,18 @@ import {HeaderPropsType} from "./HeaderContainer";
 import {NavLink} from "react-router-dom";
 
 
-export const Header = (props: HeaderPropsType) => {
-    return  <header className="header">
+export const Header = ({isAuth, login, logout}: HeaderPropsType) => {
+    return <header className="header">
         <img className="header__logo-icon" src={samuraiSvg} alt="Samurai"/>
 
-        <div className={'login'}>{props.isAuth ? 'Authorized as ' + props.login : <NavLink to={'/login'}>Login</NavLink>}</div>
+        <div className={'login'}>
+            {isAuth ?
+                <>
+                    <div>{login}</div>
+                    <button onClick={logout}>Logout</button>
+                </>
+
+                : <NavLink to={'/login'}>Login</NavLink>}
+        </div>
     </header>
 }
