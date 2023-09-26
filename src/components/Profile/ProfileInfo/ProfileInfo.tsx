@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import mainJpg from "../../../assets/img/main.jpg";
 import s from '../Profile.module.css';
 import {Preloader} from "../../Common/Preloader/Preloader";
@@ -11,7 +11,7 @@ type ProfileInfoPropsType = {
     updateStatus: (status: string) => void
 }
 
-export const ProfileInfo = (props: ProfileInfoPropsType) => {
+export const ProfileInfo = memo((props: ProfileInfoPropsType) => {
     if (!props.profile) {
         return <Preloader/>
     }
@@ -33,4 +33,4 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
             </div>
         </div>
     )
-}
+})

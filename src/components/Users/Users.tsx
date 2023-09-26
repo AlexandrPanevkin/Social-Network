@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import avatarSVG from '../../assets/img/avatar.svg'
 import s from './Users.module.css';
 import {UsersType} from "../../Redux/usersReducer";
@@ -15,7 +15,7 @@ type UsersPropsType = {
     followingInProgress: number[]
 }
 
-export const Users = (props: UsersPropsType) => {
+export const Users = memo((props: UsersPropsType) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
     let pages = []
@@ -50,9 +50,9 @@ export const Users = (props: UsersPropsType) => {
                     }}
                     >Unfollow</button> :
                     <button className={s.button} onClick={() => {
-                    props.follow(el.id)
+                        props.follow(el.id)
                     }}>Follow</button>}</div>
             </div>
         </div>)}
     </div>
-}
+})

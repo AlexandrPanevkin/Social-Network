@@ -1,10 +1,10 @@
-import React, {ChangeEvent} from "react";
+import React, {memo} from "react";
 import s from './MyPosts.module.css';
 import {Post} from "./Post/Post";
 import {ProfilePropsType} from "./MyPostsContainer";
 import {useFormik} from "formik";
 
-export const MyPosts = (props: ProfilePropsType) => {
+export const MyPosts = memo((props: ProfilePropsType) => {
     let postsElements = props.posts.map(post => <Post key={post.id} message={post.message}
                                                       likesCount={post.likesCount}/>)
 
@@ -18,13 +18,13 @@ export const MyPosts = (props: ProfilePropsType) => {
             <div>{postsElements}</div>
         </div>
     )
-}
+})
 
 type MyPostsAddItemFormType = {
     addPost: (newPost: string) => void
 }
 
-const MyPostsAddItemForm = (props: MyPostsAddItemFormType) => {
+const MyPostsAddItemForm = memo((props: MyPostsAddItemFormType) => {
     const {addPost} = props
     const formik = useFormik({
         initialValues: {
@@ -42,4 +42,4 @@ const MyPostsAddItemForm = (props: MyPostsAddItemFormType) => {
             <button className={s.button}>Add post</button>
         </div>
     </form>
-}
+})

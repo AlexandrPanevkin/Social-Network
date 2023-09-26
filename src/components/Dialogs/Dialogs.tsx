@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
@@ -6,7 +6,7 @@ import postUserSvg from "../../assets/img/postUser.png";
 import {DialogsPropsType} from "./DialogsContainer";
 import {useFormik} from "formik";
 
-export const Dialogs = (props: DialogsPropsType & { isAuth: boolean }) => {
+export const Dialogs = memo((props: DialogsPropsType & { isAuth: boolean }) => {
 
     let dialogsElements = props.dialogs.map(dialog => <DialogItem key={dialog.id} id={dialog.id} name={dialog.name}/>)
 
@@ -28,18 +28,18 @@ export const Dialogs = (props: DialogsPropsType & { isAuth: boolean }) => {
             <div>
                 <div>{messagesElements}</div>
                 <AddItemForm onSendMessageClickHandler={onSendMessageClickHandler}
-                             />
+                />
             </div>
 
         </div>
     )
-}
+})
 
 type AddItemFormPropsType = {
     onSendMessageClickHandler: (newMessage: string) => void
 }
 
-const AddItemForm = (props: AddItemFormPropsType) => {
+const AddItemForm = memo((props: AddItemFormPropsType) => {
 
     const formik = useFormik({
         initialValues: {
@@ -59,4 +59,4 @@ const AddItemForm = (props: AddItemFormPropsType) => {
             </div>
         </form>
     )
-}
+})

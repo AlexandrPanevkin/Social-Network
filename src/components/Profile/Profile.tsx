@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import s from './Profile.module.css';
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
@@ -10,11 +10,11 @@ type ProfilePropsType = {
     updateStatus: (status: string) => void
 }
 
-export const Profile = (props: ProfilePropsType) => {
+export const Profile = memo((props: ProfilePropsType) => {
     return (
         <div className={s.profile}>
             <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
             <MyPostsContainer/>
         </div>
     )
-}
+})

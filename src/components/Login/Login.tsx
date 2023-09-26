@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {useFormik} from "formik";
 import {loginPropsType, mapDispatchToLoginPropsType} from "./LoginContainer";
 import {Redirect} from "react-router-dom";
@@ -27,7 +27,7 @@ const validate = (values: any) => {
 };
 
 
-export const Login = ({login, isAuth}: loginPropsType) => {
+export const Login = memo(({login, isAuth}: loginPropsType) => {
 
     const formik = useFormik({
         initialValues: {
@@ -75,4 +75,4 @@ export const Login = ({login, isAuth}: loginPropsType) => {
             </div>
         </div>
     );
-};
+});
