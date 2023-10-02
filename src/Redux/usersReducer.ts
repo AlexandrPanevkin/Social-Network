@@ -152,36 +152,33 @@ export const followingInProgress = (isFetching: boolean, userId: number) => {
 
 
 export const requestUsers = (currentPage: number, pageSize: number) => {
-    return (dispatch: Dispatch<any>) => {
+    return async (dispatch: Dispatch) => {
         dispatch(toggleIsFetching(true))
-        usersAPI.requestUsers(currentPage, pageSize).then(data => {
-            dispatch(toggleIsFetching(false))
-            dispatch(setUsers(data.items))
-            dispatch(setTotalUsersCount(data.totalCount))
-        })
+        const data = await usersAPI.requestUsers(currentPage, pageSize)
+        dispatch(toggleIsFetching(false))
+        dispatch(setUsers(data.items))
+        dispatch(setTotalUsersCount(data.totalCount))
     }
 }
 
 export const follow = (userId: number) => {
-    return (dispatch: Dispatch<any>) => {
+    return async (dispatch: Dispatch) => {
         dispatch(followingInProgress(true, userId))
-        usersAPI.follow(userId).then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(followSuccess(userId))
-            }
-            dispatch(followingInProgress(false, userId))
-        })
+        const response = await usersAPI.follow(userId)
+        if (response.data.resultCode === 0) {
+            dispatch(followSuccess(userId))
+        }
+        dispatch(followingInProgress(false, userId))
     }
 }
 
 export const unfollow = (userId: number) => {
-    return (dispatch: Dispatch<any>) => {
+    return async (dispatch: Dispatch) => {
         dispatch(followingInProgress(true, userId))
-        usersAPI.unfollow(userId).then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(unfollowSuccess(userId))
-            }
-            dispatch(followingInProgress(false, userId))
-        })
+        const response = await usersAPI.unfollow(userId)
+        if (response.data.resultCode === 0) {
+            dispatch(unfollowSuccess(userId))
+        }
+        dispatch(followingInProgress(false, userId))
     }
 }
