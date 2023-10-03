@@ -1,4 +1,4 @@
-import {Dispatch} from "redux";
+import {AnyAction, Dispatch} from "redux";
 import {usersAPI} from "../api/api";
 
 export type UsersType = {
@@ -161,24 +161,24 @@ export const requestUsers = (currentPage: number, pageSize: number) => {
     }
 }
 
+const followUnfollow = async (dispatch: Dispatch, userId: number, apiMethod: Promise<any>, actionCreator: (userId: number) => AnyAction) => {
+    dispatch(followingInProgress(true, userId))
+    const response = await apiMethod
+    if (response.data.resultCode === 0) {
+        dispatch(actionCreator(userId))
+    }
+    dispatch(followingInProgress(false, userId))
+}
+
 export const follow = (userId: number) => {
     return async (dispatch: Dispatch) => {
-        dispatch(followingInProgress(true, userId))
-        const response = await usersAPI.follow(userId)
-        if (response.data.resultCode === 0) {
-            dispatch(followSuccess(userId))
-        }
-        dispatch(followingInProgress(false, userId))
+        await followUnfollow(dispatch, userId, usersAPI.follow(userId), followSuccess)
     }
 }
 
 export const unfollow = (userId: number) => {
     return async (dispatch: Dispatch) => {
         dispatch(followingInProgress(true, userId))
-        const response = await usersAPI.unfollow(userId)
-        if (response.data.resultCode === 0) {
-            dispatch(unfollowSuccess(userId))
-        }
-        dispatch(followingInProgress(false, userId))
+        await followUnfollow(dispatch, userId, usersAPI.unfollow(userId), unfollowSuccess)
     }
 }
