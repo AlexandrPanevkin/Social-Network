@@ -3,6 +3,7 @@ import avatarSVG from '../../assets/img/avatar.svg'
 import s from './Users.module.css';
 import {UsersType} from "../../Redux/usersReducer";
 import {NavLink} from "react-router-dom";
+import {Paginator} from "./Paginator";
 
 type UsersPropsType = {
     totalUsersCount: number
@@ -15,27 +16,38 @@ type UsersPropsType = {
     followingInProgress: number[]
 }
 
-export const Users = memo((props: UsersPropsType) => {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-
-    let pages = []
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
+export const Users = memo(({
+                               users,
+                               totalUsersCount,
+                               followingInProgress,
+                               follow,
+                               unfollow,
+                               setPage,
+                               pageSize,
+                               currentPage
+                           }: UsersPropsType) => {
+    // let pagesCount = Math.ceil(totalUsersCount / pageSize)
+    //
+    // let pages = []
+    // for (let i = 1; i <= pagesCount; i++) {
+    //     pages.push(i)
+    // }
 
     const onPageClickHandler = (page: number) => {
-        props.setPage(page)
+        setPage(page)
     }
 
     return <div className={s.users}>
-        <div>
-            {pages.map(p => {
-                return <span key={p} onClick={() => onPageClickHandler(p)}
-                             className={props.currentPage === p ? s.selectedPage : s.page}>{p}</span>
-            })
-            }
-        </div>
-        {props.users.map(el => <div className={s.usersContainer} key={el.id}>
+        {/*<div>*/}
+        {/*    {pages.map(p => {*/}
+        {/*        return <span key={p} onClick={() => onPageClickHandler(p)}*/}
+        {/*                     className={props.currentPage === p ? s.selectedPage : s.page}>{p}</span>*/}
+        {/*    })*/}
+        {/*    }*/}
+        {/*</div>*/}
+        <Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} setPage={onPageClickHandler}
+                   currentPage={currentPage}/>
+        {users.map(el => <div className={s.usersContainer} key={el.id}>
 
             <div>
                 <NavLink to={'/profile/' + el.id}>
@@ -46,11 +58,11 @@ export const Users = memo((props: UsersPropsType) => {
                 <div>Name: {el.name}</div>
                 <div>Status: {el.status}</div>
                 <div>{el.followed ? <button className={s.button} onClick={() => {
-                        props.unfollow(el.id)
+                        unfollow(el.id)
                     }}
                     >Unfollow</button> :
                     <button className={s.button} onClick={() => {
-                        props.follow(el.id)
+                        follow(el.id)
                     }}>Follow</button>}</div>
             </div>
         </div>)}
