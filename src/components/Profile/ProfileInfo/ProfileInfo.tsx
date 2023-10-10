@@ -11,8 +11,8 @@ type ProfileInfoPropsType = {
     updateStatus: (status: string) => void
 }
 
-export const ProfileInfo = memo((props: ProfileInfoPropsType) => {
-    if (!props.profile) {
+export const ProfileInfo = memo(({profile, status, updateStatus}: ProfileInfoPropsType) => {
+    if (!profile) {
         return <Preloader/>
     }
     return (
@@ -21,13 +21,13 @@ export const ProfileInfo = memo((props: ProfileInfoPropsType) => {
                 <img className={s.profileIcon} src={mainJpg} alt="Main"/>
             </div>
             <div className={s.usersProfileBox}>
-                <img className={s.img} src={props.profile.photos.large}/>
+                <img className={s.img} src={profile.photos.large} alt='profile'/>
                 <div className={s.profileInfo}>
-                    <span className={s.profileFullName}>{props.profile.fullName}</span>
+                    <span className={s.profileFullName}>{profile.fullName}</span>
                     <span
-                        className={s.profileDescription}>lookingForAJobDescription: {props.profile.lookingForAJobDescription}</span>
+                        className={s.profileDescription}>lookingForAJobDescription: {profile.lookingForAJobDescription}</span>
                     <span>
-                        <ProfileStatus updateStatus={props.updateStatus} status={props.status}/>
+                        <ProfileStatus updateStatus={updateStatus} status={status}/>
                     </span>
                 </div>
             </div>
