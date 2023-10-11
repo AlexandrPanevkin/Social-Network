@@ -11,9 +11,9 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import LoginContainer from "./components/Login/LoginContainer";
 import {compose} from "redux";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {initializeApp} from "./Redux/appReducer";
-import {StateType} from "./Redux/reduxStore";
+import {StateType, store} from "./Redux/reduxStore";
 import {Preloader} from "./components/Common/Preloader/Preloader";
 
 export type mapDispatchAppPropsType = {
@@ -53,9 +53,18 @@ const mapStateToProps = (state: StateType) => ({
     isInitialized: state.app.isInitialized
 })
 
-export default compose<FC>(
+const AppContainer = compose<FC>(
     connect(mapStateToProps, {
         initializeApp
     })
 )(App)
 
+export const MainApp = () => {
+    return (
+        <BrowserRouter>
+            <Provider store={store}>
+                <AppContainer/>
+            </Provider>
+        </BrowserRouter>
+    )
+}
