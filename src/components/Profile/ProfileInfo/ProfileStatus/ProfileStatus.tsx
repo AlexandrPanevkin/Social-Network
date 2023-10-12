@@ -5,7 +5,12 @@ type statusPropsType = {
     updateStatus: (status: string) => void
 }
 
-export class ProfileStatus extends React.Component<statusPropsType> {
+type StateType = {
+    editMode: boolean
+    status: string
+}
+
+export class ProfileStatus extends React.Component<statusPropsType, StateType> {
     state = {
         editMode: false,
         status: this.props.status
