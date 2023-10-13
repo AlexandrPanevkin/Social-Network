@@ -5,7 +5,7 @@ import {Paginator} from "../Common/Paginator/Paginator";
 import {User} from "./User";
 
 type UsersPropsType = {
-    totalUsersCount: number
+    totalItemsCount: number
     pageSize: number
     follow: (userId: number) => void
     unfollow: (userId: number) => void
@@ -17,7 +17,7 @@ type UsersPropsType = {
 
 export const Users = memo(({
                                users,
-                               totalUsersCount,
+                               totalItemsCount,
                                followingInProgress,
                                follow,
                                unfollow,
@@ -27,7 +27,7 @@ export const Users = memo(({
                            }: UsersPropsType) => {
 
     return <div className={s.users}>
-        <Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} setPage={setPage}
+        <Paginator totalItemsCount={totalItemsCount} pageSize={pageSize} setPage={setPage}
                    currentPage={currentPage}/>
         {users.map(el => <User key={el.id} follow={follow} unfollow={unfollow} user={el}/>)}
     </div>

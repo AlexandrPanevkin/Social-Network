@@ -11,24 +11,17 @@ export type UsersType = {
     status: string
     followed: boolean
 }
-export type InitialStateUsersType = {
-    users: UsersType[]
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-    followingInProgress: number[]
-}
 
 const initialState = {
     users: [] as UsersType[],
     pageSize: 5,
-    totalUsersCount: 25,
+    totalItemsCount: 25,
     currentPage: 1,
-    isFetching: false,
-    followingInProgress: [],
+    isFetching: true,
+    followingInProgress: [] as Array<number>,
 }
 
+export type InitialStateUsersType = typeof initialState;
 
 export const usersReducer = (state: InitialStateUsersType = initialState, action: usersReducerActionType): InitialStateUsersType => {
     switch (action.type) {
@@ -51,7 +44,7 @@ export const usersReducer = (state: InitialStateUsersType = initialState, action
             return {...state, currentPage: action.payload.page}
         }
         case "SET-TOTAL-USERS-COUNT": {
-            return {...state, totalUsersCount: action.payload.totalUsersCount}
+            return {...state, totalItemsCount: action.payload.totalItemsCount}
         }
         case 'TOGGLE-IS-FETCHING': {
             return {...state, isFetching: action.payload.isFetching}
@@ -111,6 +104,7 @@ export const setUsers = (users: UsersType[]) => {
 
 type setPageACType = ReturnType<typeof setPage>
 export const setPage = (page: number) => {
+    debugger
     return {
         type: 'SET-PAGE',
         payload: {
@@ -120,11 +114,11 @@ export const setPage = (page: number) => {
 }
 
 type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCount>
-export const setTotalUsersCount = (totalUsersCount: number) => {
+export const setTotalUsersCount = (totalItemsCount: number) => {
     return {
         type: 'SET-TOTAL-USERS-COUNT',
         payload: {
-            totalUsersCount
+            totalItemsCount
         }
     } as const
 }

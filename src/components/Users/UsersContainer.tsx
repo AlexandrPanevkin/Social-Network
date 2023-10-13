@@ -44,6 +44,7 @@ class UsersClassContainer extends React.Component<UsersContainerPropsType, Initi
     }
 
     onPageChange = (page: number) => {
+        debugger
         const {pageSize} = this.props
         this.props.requestUsers(page, pageSize)
     }
@@ -53,7 +54,7 @@ class UsersClassContainer extends React.Component<UsersContainerPropsType, Initi
             {this.props.isFetching && <Preloader/>}
             {!this.props.isFetching &&
                 <Users
-                    totalUsersCount={this.props.totalUsersCount}
+                    totalItemsCount={this.props.totalItemsCount}
                     pageSize={this.props.pageSize}
                     setPage={this.onPageChange}
                     currentPage={this.props.currentPage}
@@ -72,7 +73,7 @@ const mapStateToProps = (state: StateType): InitialStateUsersType => {
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),
-        totalUsersCount: getTotalUsersCount(state),
+        totalItemsCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
         followingInProgress: getFollowingInProgress(state)
