@@ -104,7 +104,6 @@ export const setUsers = (users: UsersType[]) => {
 
 type setPageACType = ReturnType<typeof setPage>
 export const setPage = (page: number) => {
-    debugger
     return {
         type: 'SET-PAGE',
         payload: {

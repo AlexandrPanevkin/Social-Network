@@ -31,7 +31,6 @@ const MyPostsAddItemForm = memo((props: MyPostsAddItemFormType) => {
             post: ''
         },
         onSubmit: values => {
-            debugger
             addPost(values.post)
 
         },
