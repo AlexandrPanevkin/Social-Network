@@ -21,7 +21,7 @@ type PropsType = RouteComponentProps<pathParamsType> & MapStatePropsType & mapDi
 
 class ProfileContainer extends React.Component<PropsType, InitialStateProfileType> {
 
-    componentDidMount() {
+    refreshProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = String(this.props.authorizedUserId)
@@ -31,6 +31,14 @@ class ProfileContainer extends React.Component<PropsType, InitialStateProfileTyp
         }
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
+    }
+
+    componentDidMount() {
+        this.refreshProfile()
+    }
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<InitialStateProfileType>, snapshot?: any) {
+        if(this.props.match.params.userId !== prevProps.match.params.userId)
+        this.refreshProfile()
     }
 
     render() {

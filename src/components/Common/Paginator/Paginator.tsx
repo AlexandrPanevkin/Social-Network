@@ -27,8 +27,8 @@ export const Paginator = memo(({
     let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
     let rightPortionPageNumber = portionNumber * portionSize;
     const onPageClickHandler = (page: number) => {
-        setPage(page)
-    }
+        setPage(page);
+    };
 
     return <div className={s.pages}>
         {portionNumber > 1 && <button onClick={() => {
