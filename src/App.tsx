@@ -1,7 +1,7 @@
 import React, {FC, lazy, Suspense} from 'react';
 import s from './App.module.css';
 import {Navbar} from "./components/Navbar/Navbar";
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, HashRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
@@ -32,7 +32,6 @@ class App extends React.Component<AppType> {
     render() {
         if (!this.props.isInitialized) return <Preloader/>
         return (
-            <BrowserRouter>
                 <div className={s.appWrapper}>
                     <HeaderContainer/>
                     <Navbar/>
@@ -48,7 +47,6 @@ class App extends React.Component<AppType> {
                         </Suspense>}/>
                     </div>
                 </div>
-            </BrowserRouter>
         )
     }
 }
@@ -65,10 +63,10 @@ const AppContainer = compose<FC>(
 
 export const MainApp = () => {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Provider store={store}>
                 <AppContainer/>
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     )
 }
