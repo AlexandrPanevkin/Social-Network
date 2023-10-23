@@ -8,13 +8,15 @@ type ProfilePropsType = {
     profile: ProfileType | null
     status: string
     updateStatus: (status: string) => void
+    isOwner: boolean
+    updatePhoto: (file: File) => void
 }
 
-export const Profile = memo((props: ProfilePropsType) => {
+export const Profile = memo(({profile, status, updateStatus, isOwner, updatePhoto}: ProfilePropsType) => {
     return (
         <div className={s.profile}>
-            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
-            <MyPostsContainer/>
+            <ProfileInfo updatePhoto={updatePhoto} isOwner={isOwner} profile={profile} status={status} updateStatus={updateStatus}/>
+            {isOwner && <MyPostsContainer/>}
         </div>
     )
 })

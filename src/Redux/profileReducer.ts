@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
+import actions from "redux-form/lib/actions";
 
 export type postsType = {
     id: number
@@ -32,13 +33,15 @@ export type ProfileType = {
     photos: PhotosType
 }
 
-type ProfileReducerActionType = addPostActionType | setUserProfileType | setStatusType
+type ProfileReducerActionType = addPostActionType | setUserProfileType | setStatusType | uploadPhotoType
 
 type addPostActionType = ReturnType<typeof addPostAC>
 
 type setUserProfileType = ReturnType<typeof setUserProfile>
 
 type setStatusType = ReturnType<typeof setStatus>
+
+type uploadPhotoType = ReturnType<typeof uploadPhoto>
 
 const initialState = {
     posts: [
@@ -70,6 +73,13 @@ export const profileReducer = (state: InitialStateProfileType = initialState, ac
         case "SET-STATUS": {
             return {...state, status: action.payload.status}
         }
+        case "UPLOAD-PHOTO": {
+            return {
+                ...state, profile: {
+                    ...state.profile, photos: action.payload.photos
+                } as ProfileType
+            }
+        }
         default: {
             return state
         }
@@ -100,6 +110,14 @@ export const setStatus = (status: string) => {
         }
     } as const
 }
+export const uploadPhoto = (photos: PhotosType) => {
+    return {
+        type: 'UPLOAD-PHOTO',
+        payload: {
+            photos
+        }
+    } as const
+}
 
 export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
     const response = await profileAPI.getProfile(userId)
@@ -118,4 +136,10 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
     }
 }
 
+export const updatePhoto = (file: File) => async (dispatch: Dispatch) => {
+    const response = await profileAPI.updateProfilePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispatch(uploadPhoto(response.data.data.photos))
+    }
+}
 
