@@ -1,7 +1,7 @@
 import React, {FC, lazy, Suspense} from 'react';
 import s from './App.module.css';
 import {Navbar} from "./components/Navbar/Navbar";
-import {BrowserRouter, HashRouter, Route} from "react-router-dom";
+import {BrowserRouter, HashRouter, Redirect, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
@@ -36,7 +36,8 @@ class App extends React.Component<AppType> {
                     <HeaderContainer/>
                     <Navbar/>
                     <div className={s.appWrapperContent}>
-                        <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
+                        <Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>
+                        <Route  path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
                         <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
                         <Route path='/users' render={withSuspense(UsersClassContainer)}/>
                         <Route path='/news' component={News}/>

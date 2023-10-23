@@ -6,7 +6,8 @@ export type AppReducerActionType = initializedSuccessType
 type initializedSuccessType = ReturnType<typeof initializedSuccess>
 
 const initialState = {
-    isInitialized: false
+    isInitialized: false,
+    globalError: null
 }
 
 export type InitialStateAppType = typeof initialState
