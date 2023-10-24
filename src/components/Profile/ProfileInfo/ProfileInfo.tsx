@@ -2,7 +2,7 @@ import React, {ChangeEvent, memo} from "react";
 import mainJpg from "../../../assets/img/main.jpg";
 import s from '../Profile.module.css';
 import {Preloader} from "../../Common/Preloader/Preloader";
-import {ProfileType, updatePhoto} from "../../../Redux/profileReducer";
+import {ContactsType, ProfileType, updatePhoto} from "../../../Redux/profileReducer";
 import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 import avatarSVG from '../../../assets/img/avatar.svg'
 
@@ -18,8 +18,8 @@ export const ProfileInfo = memo(({profile, status, updateStatus, isOwner, update
     if (!profile) {
         return <Preloader/>
     }
-    const onUpdatePhotoHandler = (e:ChangeEvent<HTMLInputElement>) => {
-        if(e.target.files && e.target.files.length) {
+    const onUpdatePhotoHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length) {
             updatePhoto(e.target.files[0])
         }
     }
@@ -33,9 +33,7 @@ export const ProfileInfo = memo(({profile, status, updateStatus, isOwner, update
                      alt='profile'/>
                 {isOwner && <input onChange={onUpdatePhotoHandler} type={'file'}/>}
                 <div className={s.profileInfo}>
-                    <span className={s.profileFullName}>{profile.fullName}</span>
-                    <span
-                        className={s.profileDescription}>lookingForAJobDescription: {profile.lookingForAJobDescription}</span>
+
                     <span>
                         <ProfileStatus updateStatus={updateStatus} status={status}/>
                     </span>
@@ -44,3 +42,12 @@ export const ProfileInfo = memo(({profile, status, updateStatus, isOwner, update
         </div>
     )
 })
+
+type ContactsPropsType = {
+    contactTitle: string
+    contactValue: string
+}
+
+export const Contact = ({contactTitle, contactValue}: ContactsPropsType) => {
+    return <div>{contactTitle}: {contactValue}</div>
+}

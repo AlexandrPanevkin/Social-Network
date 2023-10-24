@@ -31,6 +31,7 @@ export class ProfileStatus extends React.Component<statusPropsType, StateType> {
             status: e.currentTarget.value
         })
     }
+
     componentDidUpdate(prevProps: Readonly<statusPropsType>, prevState: Readonly<{}>, snapshot?: any) {
         if (prevProps.status !== this.props.status) {
             this.setState({
@@ -44,6 +45,7 @@ export class ProfileStatus extends React.Component<statusPropsType, StateType> {
             <div>
                 {!this.state.editMode &&
                     <div>
+                        Status:
                         <span onDoubleClick={this.activateEditMode}>{this.props.status || 'There is no status'}</span>
                     </div>
                 }

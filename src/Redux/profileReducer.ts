@@ -1,6 +1,5 @@
 import {Dispatch} from "redux";
-import {profileAPI, usersAPI} from "../api/api";
-import actions from "redux-form/lib/actions";
+import {profileAPI} from "../api/api";
 
 export type postsType = {
     id: number
