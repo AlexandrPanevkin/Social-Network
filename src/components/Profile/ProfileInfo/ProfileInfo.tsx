@@ -33,7 +33,7 @@ export const ProfileInfo = memo(({profile, status, updateStatus, isOwner, update
                      alt='profile'/>
                 {isOwner && <input onChange={onUpdatePhotoHandler} type={'file'}/>}
                 <div className={s.profileInfo}>
-
+                    <ProfileData profile={profile}/>
                     <span>
                         <ProfileStatus updateStatus={updateStatus} status={status}/>
                     </span>
@@ -42,6 +42,30 @@ export const ProfileInfo = memo(({profile, status, updateStatus, isOwner, update
         </div>
     )
 })
+
+type ProfileDataPropsType = {
+    profile: ProfileType
+}
+
+export const ProfileData = ({profile}: ProfileDataPropsType) => {
+    return (
+        <>
+            <span className={s.profileFullName}>{profile.fullName}</span>
+            <span>
+                        Looking for a job: {profile.lookingForAJob ? 'yes' : 'no'}
+                    </span>
+            {
+                profile.lookingForAJob && <span
+                    className={s.profileDescription}>lookingForAJobDescription: {profile.lookingForAJobDescription}</span>}
+            <span>
+                        Contacts: {Object.keys(profile.contacts).map(key => {
+                return <Contact contactTitle={key} contactValue={profile.contacts[key as keyof ContactsType]}
+                                key={key}/>
+            })}
+                    </span>
+        </>
+    )
+}
 
 type ContactsPropsType = {
     contactTitle: string
