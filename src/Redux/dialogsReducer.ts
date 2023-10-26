@@ -1,6 +1,6 @@
 export type DialogsReducerActionType = sendNewMessageTextType
 
-type sendNewMessageTextType = ReturnType<typeof sendNewMessageText>
+export type sendNewMessageTextType = ReturnType<typeof sendNewMessageText>
 
 
 export type DialogsType = {

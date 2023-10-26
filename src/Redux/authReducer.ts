@@ -3,7 +3,7 @@ import {authAPI} from "../api/api";
 
 export type AuthReducerActionType = setAuthUserDataType
 
-type setAuthUserDataType = ReturnType<typeof setAuthUserData>
+export type setAuthUserDataType = ReturnType<typeof setAuthUserData>
 
 const SET_AUTH_USER_DATA = "app/auth/SET-AUTH-USER-DATA"
 

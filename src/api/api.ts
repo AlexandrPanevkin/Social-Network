@@ -1,4 +1,5 @@
 import axios from "axios";
+import {ProfileType} from "../Redux/profileReducer";
 
 const instance = axios.create({
     withCredentials: true,
@@ -12,8 +13,8 @@ export const usersAPI = {
     requestUsers(currentPage = 1, pageSize = 4) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => {
-            return response.data
-        })
+                return response.data
+            })
     },
     follow(userId: number) {
         return instance.post(`follow/${userId}`)
@@ -24,8 +25,9 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-    getProfile(userId: string) {
-        return instance.get(`profile/${userId}`)
+    async getProfile(userId: number) {
+        const res = await instance.get<ProfileType>(`profile/` + userId);
+        return res.data;
     },
     getStatus(userId: string) {
         return instance.get<string>(`profile/status/${userId}`)
@@ -41,7 +43,10 @@ export const profileAPI = {
                 'Content-Type': 'multipart/form-data'
             }
         })
-    }
+    },
+    updateProfile(profile: ProfileType) {
+        return instance.put<APIResponseType>(`profile`, profile).then(res => res.data);
+    },
 }
 
 
@@ -49,10 +54,21 @@ export const authAPI = {
     me() {
         return instance.get(`auth/me`)
     },
-    login(email: string, password: string, rememberMe: boolean, ) {
-         return instance.post('auth/login', {email, password, rememberMe})
+    login(email: string, password: string, rememberMe: boolean,) {
+        return instance.post('auth/login', {email, password, rememberMe})
     },
     logout() {
         return instance.delete('auth/login')
     }
+}
+
+export enum ResultCodesEnum {
+    Success = 0,
+    Error = 1
+}
+
+export type APIResponseType<D = {}, RC = ResultCodesEnum> = {
+    data: D
+    messages: Array<string>
+    resultCode: RC
 }

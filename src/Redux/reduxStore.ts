@@ -1,10 +1,10 @@
-import {applyMiddleware, combineReducers, compose, createStore} from "redux";
-import {profileReducer} from "./profileReducer";
-import {dialogsReducer} from "./dialogsReducer";
-import {usersReducer} from "./usersReducer";
-import {authReducer} from "./authReducer";
-import thunkMiddleware from 'redux-thunk';
-import {reducer as formReducer} from 'redux-form';
+import {Action, applyMiddleware, combineReducers, compose, createStore} from "redux";
+import {profileReducer, ProfileReducerActionType} from "./profileReducer";
+import {dialogsReducer, sendNewMessageTextType} from "./dialogsReducer";
+import {usersReducer, usersReducerActionType} from "./usersReducer";
+import {authReducer, setAuthUserDataType} from "./authReducer";
+import thunkMiddleware, {ThunkAction} from 'redux-thunk';
+import {FormAction, reducer as formReducer} from 'redux-form';
 import {appReducer} from "./appReducer";
 
 const rootReducer = combineReducers({
@@ -16,7 +16,19 @@ const rootReducer = combineReducers({
 
 })
 
+type ActionsType =
+    setAuthUserDataType
+    | sendNewMessageTextType
+    | ProfileReducerActionType
+    | usersReducerActionType
+
 export type StateType = ReturnType<typeof rootReducer>
+
+export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, StateType, unknown, ActionsType | FormAction>
+
+export type InferActionsTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
+
+export type BaseThunkType<A extends Action = Action, R = Promise<void>> = ThunkAction<R, StateType, unknown, A>
 
 export const composeEnhancers =
     (window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;

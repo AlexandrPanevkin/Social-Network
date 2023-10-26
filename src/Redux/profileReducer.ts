@@ -1,5 +1,8 @@
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
+import {AppThunkType, StateType} from "./reduxStore";
+import {stopSubmit} from "redux-form";
+import {findContactsInError} from "../utils/findContactsInError";
 
 export type postsType = {
     id: number
@@ -24,15 +27,16 @@ export type ContactsType = {
 }
 
 export type ProfileType = {
-    userId: number
+    userId?: number
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
     contacts: ContactsType
-    photos: PhotosType
+    photos?: PhotosType
+    aboutMe?: string
 }
 
-type ProfileReducerActionType = addPostActionType | setUserProfileType | setStatusType | uploadPhotoType
+export type ProfileReducerActionType = addPostActionType | setUserProfileType | setStatusType | uploadPhotoType
 
 type addPostActionType = ReturnType<typeof addPostAC>
 
@@ -118,9 +122,9 @@ export const uploadPhoto = (photos: PhotosType) => {
     } as const
 }
 
-export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
+export const getUserProfile = (userId: number) => async (dispatch: Dispatch) => {
     const response = await profileAPI.getProfile(userId)
-    dispatch(setUserProfile(response.data))
+    dispatch(setUserProfile(response))
 }
 
 export const getStatus = (userId: string) => async (dispatch: Dispatch) => {
@@ -142,3 +146,17 @@ export const updatePhoto = (file: File) => async (dispatch: Dispatch) => {
     }
 }
 
+export const updateProfile = (formData: ProfileType): AppThunkType => async (dispatch, getState) => {
+    const data = await profileAPI.updateProfile(formData)
+    const userId = getState().auth.userId
+    if (data.resultCode === 0) {
+        if (userId != null) {
+            dispatch(getUserProfile(userId))
+        } else {
+            throw new Error("userId can't be null")
+        }
+    } else {
+        dispatch(stopSubmit("edit-profile", {_error: data.messages[0] }))
+        return Promise.reject(data.messages[0])
+    }
+}

@@ -63,7 +63,7 @@ export const usersReducer = (state: InitialStateUsersType = initialState, action
     }
 }
 
-type usersReducerActionType =
+export type usersReducerActionType =
     followACType
     | unfollowACType
     | setUsersACType

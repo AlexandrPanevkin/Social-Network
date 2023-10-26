@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
 import {useFormik} from "formik";
-import {loginPropsType, mapDispatchToLoginPropsType} from "./LoginContainer";
+import {loginPropsType} from "./LoginContainer";
 import {Redirect} from "react-router-dom";
 
 type FormikErrorType = {
