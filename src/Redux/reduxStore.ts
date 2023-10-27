@@ -2,7 +2,7 @@ import {Action, applyMiddleware, combineReducers, compose, createStore} from "re
 import {profileReducer, ProfileReducerActionType} from "./profileReducer";
 import {dialogsReducer, sendNewMessageTextType} from "./dialogsReducer";
 import {usersReducer, usersReducerActionType} from "./usersReducer";
-import {authReducer, setAuthUserDataType} from "./authReducer";
+import {authReducer, setAuthUserData} from "./authReducer";
 import thunkMiddleware, {ThunkAction} from 'redux-thunk';
 import {FormAction, reducer as formReducer} from 'redux-form';
 import {appReducer} from "./appReducer";
@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
 })
 
 type ActionsType =
-    setAuthUserDataType
+    ReturnType<typeof setAuthUserData>
     | sendNewMessageTextType
     | ProfileReducerActionType
     | usersReducerActionType

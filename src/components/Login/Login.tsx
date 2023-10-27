@@ -2,6 +2,9 @@ import React, {memo} from 'react';
 import {useFormik} from "formik";
 import {loginPropsType} from "./LoginContainer";
 import {Redirect} from "react-router-dom";
+import {createField} from '../Common/FormControl/FOrmControls';
+import {required} from "../../utils/validators/validators";
+import {Input} from "antd";
 
 type FormikErrorType = {
     email?: string;
@@ -27,17 +30,18 @@ const validate = (values: any) => {
 };
 
 
-export const Login = memo(({login, isAuth}: loginPropsType) => {
+export const Login = memo(({login, isAuth, captchaUrl}: loginPropsType) => {
 
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
-            rememberMe: false
+            rememberMe: false,
+            captchaUrl: ''
         },
         validate,
         onSubmit: values => {
-            login(values.email, values.password, values.rememberMe)
+            login(values.email, values.password, values.rememberMe, values.captchaUrl)
         },
     })
 
@@ -69,6 +73,10 @@ export const Login = memo(({login, isAuth}: loginPropsType) => {
                                    {...formik.getFieldProps('checkbox')}
                             /> Remember me
                         </div>
+                        {captchaUrl && <img src={captchaUrl}/>}
+                        {captchaUrl &&
+                            <input                                                {...formik.getFieldProps('captchaUrl')}
+                            />}
                         <button>login</button>
                     </form>
                 </div>

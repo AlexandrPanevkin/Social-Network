@@ -6,13 +6,14 @@ import {InitialStateAuthType, login} from "../../Redux/authReducer";
 import {StateType} from "../../Redux/reduxStore";
 
 export type mapDispatchToLoginPropsType = {
-    login: (email: string, password: string, rememberMe: boolean) => void
+    login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
 }
 export type loginPropsType = mapDispatchToLoginPropsType & InitialStateAuthType
 
 const mapStateToProps = (state: StateType) => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        captchaUrl: state.auth.captchaUrl
     }
 }
 
